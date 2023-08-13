@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
 
+<project version="4">
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
-    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true"
+      nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="flexi.MainApp" />
       <module name="flexi" />
       <extension name="coverage">
