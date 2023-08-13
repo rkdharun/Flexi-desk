@@ -1,9 +1,10 @@
-module com.example {
-    requires javafx.controls;
-    requires javafx.fxml;
-    requires javafx.media;
-    opens flexi to javafx.fxml;
-    opens flexi.controller to javafx.fxml;
-    exports flexi;
-  
+module com.github.rkdharun.flexi {
+  requires javafx.controls;
+  requires javafx.fxml;
+  requires javafx.media;
+
+  opens com.github.rkdharun.flexidesk to javafx.fxml;
+  opens com.github.rkdharun.flexidesk.controller to javafx.fxml;
+
+  exports com.github.rkdharun.flexidesk;
 }

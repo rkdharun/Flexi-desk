@@ -1,4 +1,3 @@
-
 # Flexi 
 
 Flexi enables a seamless connectivity between your devices connected in a same network.
@@ -9,11 +8,9 @@ Flexi enables a seamless connectivity between your devices connected in a same n
 - supports multiple platforms
 
 ## Architecture
-   This application folows a client server architecture. Client scans a QR code to obtain information from the server like "ip" and "port". client intializes the connection to the server. Server will generate a QR code with "ip" and "port" informations.
+  This application folows a client server architecture. Client scans a QR code to obtain information from the server like "ip" and "port". client intializes the connection to the server. Server will generate a QR code with "ip" and "port" informations.
  
-
 ## Protocol
-
 
 Flexi follows TCP/IP protocols to communicate and leverages the encryption and decrytion technologies of the SSl. Since TCP/IP protocol is used, It ensures the proper transmission of data between the devices and ensures the security 
 
@@ -23,12 +20,11 @@ Flexi uses TLS over TCP to ensure secure communication between devices. TLS prov
 
 ## Packet Types
 
-- Flexi Utilizes 3 types of packets
+- Flexi Utilizes 4 types of packets
   - AuthenticationPacket
   - FilePacket
   - ClipBoardPacket
   - InvalidRequest
-
 
 ### Packet Flow
 
@@ -107,41 +103,34 @@ The **FilePacket** is used to transfer data between the client and the server. T
   - **packet length** : it specifies the total length of the packet
   - **packet Type** : specifies the packet type (filepacket = 0x02)
 
-
-
 #### Body
 
 - **FileNameLength**: This field specifies the lenght of the file name that is sent
 - **FileName** : Specifies the file name with extension
-- **FileSize**: This field specifies the size of the file in bytes .
-- **PayloadLength**: This field specifies the length of the file
-- **Payload**: This field contains the file data.
+- **FileDataLength**: This field specifies the size of the file in bytes .
+- **FileData**: This field contains the file data.
 
 #### Structure
 
-| Field           | Bytes | value |
-|-----------------|-------| ----- |
-| Packet Length   | 4     |       |
-| Packet Type     | 1     | 0x02  |
-| FileNameLength  | varies|       |
-| FileName        |       |       |
-| FileSize        | varies|       |
-| PayloadLength   | 4     |       |
-| Payload         | varies|       |
+| Field           | Bytes  | value |
+|-----------------|--------| ----- |
+| Packet Length   | 4      |       |
+| Packet Type     | 1      | 0x02  |
+| FileNameLength  | 4      |       |
+| FileName        | varies |       |
+| FileDataLength  | 4      |       |
+| FileData        | varies |       |
 
 ### ClipboardPacket
 
 The **ClipboardPacket** is used to transfer clipboard between the client and the server. This packet contains the following fields:
 
 #### Header
-   
+
   - **packet length** : it specifies the total length of the packet
   - **packet Type** : specifies the packet type (filepacket = 0x02)
 
-
-
 #### Body
-
 
 - **PayloadLength**: This field specifies the length of the file
 - **Payload**: This field contains the file data.
@@ -154,6 +143,3 @@ The **ClipboardPacket** is used to transfer clipboard between the client and the
 | Packet Type     | 1     | 0x02  |
 | PayloadLength   | 4     |       |
 | Payload         | varies|       |
-
-
-
