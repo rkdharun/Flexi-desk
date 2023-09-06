@@ -1,5 +1,8 @@
 package com.github.rkdharun.flexidesk;
 
+import com.github.rkdharun.flexidesk.controller.app.ApplicationController;
+import com.github.rkdharun.flexidesk.network.io.Server;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +23,7 @@ public class MainApp extends Application {
   private static Stage stage;
   static double initialY;
   static double initialX;
-
-  public static int APPLICATION_MODE;
+  public static ApplicationController applicationController;
 
 
   @Override
@@ -68,6 +70,7 @@ public class MainApp extends Application {
   }
 
   public static void main(String[] args) {
+    applicationController = new ApplicationController();
     launch(args);
 
   }

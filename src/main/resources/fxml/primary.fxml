@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: #1c1c1c; -fx-background-radius: 15px 15px 15px 15px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.rkdharun.flexidesk.controller.PrimaryFXMLController">
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: #1c1c1c; -fx-background-radius: 15px 15px 15px 15px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.rkdharun.flexidesk.controller.ui.PrimaryFXMLController">
    <effect>
       <Blend />
    </effect>
@@ -25,14 +25,17 @@
             <VBox alignment="CENTER" prefHeight="500.0" prefWidth="88.0" spacing="20.0" style="-fx-background-color: #222222; -fx-background-radius: 15px 0px  0px 15px;">
                <children>
                   <Pane prefHeight="66.0" prefWidth="59.0" />
-                  <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#createNetwork" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 0px 15px 15px 0px; -fx-background-color: #227fff;" text="Create" textFill="WHITE">
+                  <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#createNetwork" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 0px 15px 15px 0px; -fx-background-color: #227FFF;" text="Create" textFill="WHITE">
                      <font>
-                        <Font name="Source Code Pro Bold" size="16.0" />
+                        <Font name="Segoe UI Semibold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 0px 15px 15px 0px;" text="Join" />
+                  <Button fx:id="btnJoin" mnemonicParsing="false" onAction="#joinNetwork" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 0px 15px 15px 0px; -fx-background-color: #227FFF;" text="Join" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font></Button>
                   <Pane prefHeight="123.0" prefWidth="150.0" VBox.vgrow="ALWAYS" />
-                  <ImageView fitHeight="29.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                  <ImageView fx:id="btnLogout" fitHeight="29.0" fitWidth="25.0" onMouseClicked="#closeApp" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                      <image>
                         <Image url="@../images/icons/icon_logout.png" />
                      </image>
