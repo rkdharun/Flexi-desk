@@ -29,15 +29,13 @@ public class QRGenerator {
     BitMatrix byteMatrix = qrCodeWriter.encode(qrCodeText, BarcodeFormat.QR_CODE, size, size, hintMap);
     // Make the BufferedImage that are to hold the QRCode
     int matrixWidth = byteMatrix.getWidth();
-    int matrixHeight = matrixWidth;
-    BufferedImage image = new BufferedImage(matrixWidth, matrixHeight, BufferedImage.TYPE_INT_RGB);
+    BufferedImage image = new BufferedImage(matrixWidth, matrixWidth, BufferedImage.TYPE_INT_RGB);
     image.createGraphics();
-
     Graphics2D graphics = (Graphics2D) image.getGraphics();
-    graphics.setColor(Color.WHITE);
-    graphics.fillRect(0, 0, matrixWidth, matrixHeight);
-    // Paint and save the image using the ByteMatrix
     graphics.setColor(Color.BLACK);
+    graphics.fillRect(0, 0, matrixWidth, matrixWidth);
+    // Paint and save the image using the ByteMatrix
+    graphics.setColor(Color.WHITE);
 
     for (int i = 0; i < matrixWidth; i++) {
       for (int j = 0; j < matrixWidth; j++) {

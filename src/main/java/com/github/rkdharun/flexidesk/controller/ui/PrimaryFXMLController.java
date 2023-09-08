@@ -11,9 +11,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Blend;
-import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -45,47 +45,60 @@ public class PrimaryFXMLController implements Initializable {
   @FXML
   private BorderPane mainBorderPane;
 
+
   @FXML
   private void createNetwork() {
+    //create the server
+    MainApp.applicationController.createServer(); //server creation does not interfere with the UI
+
+    //just adds a selection effect for the button
+    btnJoin.setMinHeight(35);
+    btnCreate.setMinHeight(40);
+
+    //get the page
+    qrPane = fl.getPage("qrpage");
+
+    // use the PrimaryFXMLController as its controller
+    qrPane.setController(this);
+
     try {
-      //get the QR page r
-      qrPane = fl.getPage("qrpage");
-
-      // use the PrimaryFXMLController as its controller
-      qrPane.setController(this);
-
       //retrive the Pane (node)
       qrUI = qrPane.load();
-
-      //set status to loading
-      lbl_Info.setText("LOADING QR...");
-
-      //insert the loaded page in the main UI
-      mainBorderPane.setCenter(qrUI);
 
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    //create the server
-    MainApp.applicationController.createServer();
+
+    //insert the loaded page in the main UI
+    mainBorderPane.setCenter(qrUI);
+
+    //set status to loading
+    lbl_Info.setText("LOADING QR...");
 
     //set the QR code in the mainUI and update the status
     img_qrCode.setImage(MainApp.applicationController.getServer().getQR());
-    lbl_Info.setText("Created network at port : "+MainApp.applicationController.getServer().getPort());
+    lbl_Info.setText("Created network at port : " + MainApp.applicationController.getServer().getPort());
+
   }
 
   public void joinNetwork() {
+    MainApp.applicationController.stopServer();
+    btnCreate.setMinHeight(35);
     System.out.println("Hi biro");
+    btnJoin.setMinHeight(40);
   }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     fl = new FXMLoader();
-    btnCreate.setEffect(new Blend(BlendMode.DARKEN));
-    btnJoin.setEffect(new Blend(BlendMode.DARKEN));
+    //get the QR page
+
+
   }
 
   public void closeApp(MouseEvent mouseEvent) {
+    MainApp.applicationController.stopServer();
+
     System.exit(0);
   }
 }

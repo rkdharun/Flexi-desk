@@ -1,0 +1,26 @@
+
+on server side
+
+//TODO: implement the broadcast sender with the port that is auto allocated
+//TODO: set the message with the tcp server listening port and the address of the corresponding interface
+//TODO: set the QR with destination address for the broadcast receiver
+//TODO: loop the broadcast until a connection received
+//TODO: again send broadcast if the connection is disconnected
+
+for mobile
+
+//TODO: same stuff
+
+
+//client
+
+for pc
+//TODO: enter the port number shown in QR  (it is the port where the broadcast should be received)
+//TODO: retrieve the ip and port information from the received broadcast and stop receiving the broadcast
+//TODO: connect to the server with this information
+
+
+for mobile
+//TODO:scan the QR and do the same for pcs
+
+

@@ -6,15 +6,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="590.0" style="-fx-background-color: Transparent; -fx-background-radius: 15px 15px 15px 15px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
+            prefWidth="590.0" style="-fx-background-color: Transparent; -fx-background-radius: 15px 15px 15px 15px;"
+            xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <VBox fx:id="addressVbox" layoutX="97.0" layoutY="332.0" prefHeight="100.0" prefWidth="390.0">
-    <children>
-      <Label fx:id="lbl_Info" prefHeight="35.0" prefWidth="390.0" text="Loading... " textFill="WHITE">
-        <font>
-          <Font name="System Bold" size="16.0" />
-        </font>
-      </Label>
-    </children>
+    <Label fx:id="lbl_Info" prefHeight="35.0" prefWidth="390.0" text="Loading... " textFill="WHITE">
+      <font>
+        <Font name="System Bold" size="16.0"/>
+      </font>
+    </Label>
   </VBox>
-<ImageView fx:id="img_qrCode" fitHeight="229.0" fitWidth="254.0" layoutX="121.0" layoutY="91.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+  <ImageView fx:id="img_qrCode" fitHeight="229.0" fitWidth="254.0" layoutX="121.0" layoutY="91.0"
+             nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true"/>
 </AnchorPane>

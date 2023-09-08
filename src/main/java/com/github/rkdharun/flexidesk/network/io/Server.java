@@ -1,6 +1,7 @@
 package com.github.rkdharun.flexidesk.network.io;
 
-import com.github.rkdharun.flexidesk.config.ConnectionConfiguration;
+import com.github.rkdharun.flexidesk.MainApp;
+import com.github.rkdharun.flexidesk.config.SSLConfiguration;
 import com.github.rkdharun.flexidesk.utilities.QRGenerator;
 import com.google.zxing.WriterException;
 
@@ -14,55 +15,66 @@ public class Server {
 
   private int port;
   public SSLServerSocket sslServerSocket = null;
-
-  ConnectionConfiguration connectionConfiguration;
+  private final SSLConfiguration sslConfiguration;
+  private BroadcastSender bs;
 
   public Server() {
-    connectionConfiguration = new ConnectionConfiguration();
+    sslConfiguration = new SSLConfiguration();
   }
 
   public void start() {
+    new Thread(() -> {
+      MainApp.currentThreadCounts += 1;
+      try {
+        bs = new BroadcastSender();
+        sslServerSocket = (SSLServerSocket) sslConfiguration.getSslServerSocketFactory().createServerSocket(0);
+        setPort(sslServerSocket.getLocalPort());
+        sslServerSocket.setNeedClientAuth(true);
 
-    new Thread(new Runnable() {
-      @Override
-      public void run() {
-        try {
-          sslServerSocket = (SSLServerSocket) connectionConfiguration.getSslServerSocketFactory().createServerSocket(0);
-          setPort(sslServerSocket.getLocalPort());
-          System.out.println("Server started at port " + sslServerSocket.getLocalPort());
-          sslServerSocket.setNeedClientAuth(true);
-          acceptConnections();
-          return;
-        } catch (Exception e) {
-          System.out.println(e.getMessage());
 
-        }
+        new Thread(this::acceptConnections).start();
+
+        System.out.println("Ready To accept Conections");
+      } catch (Exception e) {
+        e.printStackTrace();
+
       }
+      MainApp.currentThreadCounts -= 1;
+
     }).start();
 
   }
 
   public void initConfiguration() {
-    connectionConfiguration.setDefaultCertificate();
+    sslConfiguration.setDefaultCertificate();
 
   }
 
   public void acceptConnections() {
     while (true) {
-
-      SSLSocket sslSocket = null;
+      SSLSocket sslSocket;
       try {
+        bs.startBroadcasting(String.valueOf(sslServerSocket.getLocalPort()));
         sslSocket = (SSLSocket) sslServerSocket.accept();
+        bs.stopBroadcasting();
+        Thread t1 = new Thread(new ClientHandler(sslSocket));
+        t1.start();
+
+
+        System.out.println("Connection ACcepted");
+
       } catch (IOException e) {
-        throw new RuntimeException(e);
+        if (sslServerSocket.isClosed()) break;
       }
-      new Thread(new ClientHandler(sslSocket)).start();
     }
   }
 
+
   public javafx.scene.image.Image getQR() {
     try {
-      return QRGenerator.createQRImage(Integer.toString(this.getPort()), 500);
+      String message = this.getPort() + ":" + bs.getBroadcastPort();
+      System.out.println(message);
+      return QRGenerator.createQRImage(message, 500);
     } catch (WriterException | IOException e) {
       System.out.println(e.getMessage());
     }
@@ -81,8 +93,10 @@ public class Server {
 
   public void close() {
     try {
-      if (sslServerSocket != null)
+      if (sslServerSocket != null) {
         sslServerSocket.close();
+        bs.stopBroadcasting();
+      }
 
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -90,8 +104,9 @@ public class Server {
   }
 }
 
+
 class ClientHandler implements Runnable {
-  private final SSLSocket sslSocket;
+  private SSLSocket sslSocket;
 
   public ClientHandler(SSLSocket sslSocket) {
     this.sslSocket = sslSocket;
@@ -99,19 +114,24 @@ class ClientHandler implements Runnable {
 
   @Override
   public void run() {
+    MainApp.currentThreadCounts += 1;
     try {
       System.out.println("reading from client");
       InputStream is = sslSocket.getInputStream();
       OutputStream os = sslSocket.getOutputStream();
       byte[] buff = new byte[1000];
-      String msg = "HI";
 
       while (is.read(buff) != -1) {
         os.write(buff);
       }
 
     } catch (Exception e) {
-      e.printStackTrace();
+      sslSocket = null;
+      System.out.println(e.getMessage());
+      return;
+
     }
+
+    MainApp.currentThreadCounts -= 1;
   }
 }

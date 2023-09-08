@@ -25,7 +25,8 @@
     </goals>
     <properties>
       <exec.args>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address} --module-path
-        %classpath --module ${project.groupId}/${mainClass}</exec.args>
+        %classpath --module ${project.groupId}/${mainClass}
+      </exec.args>
       <exec.executable>java</exec.executable>
       <jpda.listen>true</jpda.listen>
     </properties>

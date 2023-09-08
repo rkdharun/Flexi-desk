@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
@@ -33,16 +33,17 @@
       <artifactId>javafx-media</artifactId>
       <version>11</version>
     </dependency>
-    <dependency>
-      <groupId>com.google.zxing</groupId>
-      <artifactId>core</artifactId>
-      <version>3.5.0</version>
-    </dependency>
+
 
     <dependency>
       <groupId>org.bouncycastle</groupId>
       <artifactId>bcpkix-jdk15on</artifactId>
       <version>1.60</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>3.5.0</version>
     </dependency>
 
   </dependencies>
@@ -58,7 +59,8 @@
             <configuration>
               <tasks>
                 <echo file="${project.build.directory}/runme.bat">start jlink-image\bin\javaw -jar
-                  modules\${project.artifactId}-${project.version}.jar</echo>
+                  modules\${project.artifactId}-${project.version}.jar
+                </echo>
               </tasks>
             </configuration>
             <goals>
@@ -85,7 +87,7 @@
         </dependencies>
       </plugin>
 
-      <!-- Adds the mainClass to the jar so it will run outside -->
+      <!-- Adds the mainClass to the jar, so it will run outside -->
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.1.0</version>
@@ -99,7 +101,7 @@
         </configuration>
       </plugin>
 
-      <!-- Makes the jLink setup so you can give it to your friends  -->
+      <!-- Makes the jLink setup, so you can give it to your friends  -->
       <plugin>
         <groupId>org.moditect</groupId>
         <artifactId>moditect-maven-plugin</artifactId>
@@ -130,7 +132,7 @@
         </executions>
       </plugin>
 
-      <!-- Copies the depend FX files to your program  -->
+      <!-- Copies the depend on FX files to your program  -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>

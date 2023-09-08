@@ -10,7 +10,7 @@ import java.io.IOException;
 public class FXMLoader {
 
 
-  public FXMLLoader getPage(String fxmlName){
+  public FXMLLoader getPage(String fxmlName) {
     return new FXMLLoader(MainApp.class.getResource("/fxml/" + fxmlName + ".fxml"));
   }
 

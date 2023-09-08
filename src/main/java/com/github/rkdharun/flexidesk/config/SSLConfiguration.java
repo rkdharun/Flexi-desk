@@ -9,7 +9,7 @@ import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
-public class ConnectionConfiguration {
+public class SSLConfiguration {
 
   TrustManager[] trustAllCerts;
   KeyStore keyStore = null;
@@ -22,7 +22,7 @@ public class ConnectionConfiguration {
 
   public static int APP_MODE;
 
-  public ConnectionConfiguration() {
+  public SSLConfiguration() {
     try {
       //create a dummy trust manager to trust all the certificates
       trustAllCerts = new TrustManager[]{new DefaultTrustManager()};
@@ -45,10 +45,10 @@ public class ConnectionConfiguration {
   public void setDefaultCertificate() {
 
     //create certificate generator object
-     cg = new SelfSignedCertificateGenerator();
+    cg = new SelfSignedCertificateGenerator();
 
     //create a certificate chain to hold the returned certificate
-    X509Certificate[] certificateChain = new X509Certificate[0];
+    X509Certificate[] certificateChain;
 
     try {
       //create a self-signed certificate
@@ -67,7 +67,7 @@ public class ConnectionConfiguration {
       sslServerSocketFactory = sslContext.getServerSocketFactory();
 
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+     e.printStackTrace();
     }
   }
 

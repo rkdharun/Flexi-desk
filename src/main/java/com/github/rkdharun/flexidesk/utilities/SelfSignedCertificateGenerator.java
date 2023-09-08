@@ -18,7 +18,7 @@ import java.util.Date;
 
 public class SelfSignedCertificateGenerator {
 
-  public  KeyPair keyPair;
+  public KeyPair keyPair;
 
   public X509Certificate[] generate() throws Exception {
     Security.addProvider(new BouncyCastleProvider());
@@ -30,7 +30,6 @@ public class SelfSignedCertificateGenerator {
 
     // Generate Certificate
     X500Name issuerName = new X500Name("CN=SelfSigned");
-    X500Name subjectName = issuerName;
     BigInteger serialNumber = BigInteger.valueOf(System.currentTimeMillis());
 
     // Valid from now to 1 year
@@ -38,20 +37,19 @@ public class SelfSignedCertificateGenerator {
     Date notAfter = new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 365); // 1 year after
 
     SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfo.getInstance(keyPair.getPublic().getEncoded());
-    X509v3CertificateBuilder certificateBuilder = new X509v3CertificateBuilder(issuerName, serialNumber, notBefore, notAfter, subjectName, publicKeyInfo);
+    X509v3CertificateBuilder certificateBuilder = new X509v3CertificateBuilder(issuerName, serialNumber, notBefore, notAfter, issuerName, publicKeyInfo);
 
     ContentSigner contentSigner = new JcaContentSignerBuilder("SHA256WithRSA").build(keyPair.getPrivate());
     X509CertificateHolder certificate = certificateBuilder.build(contentSigner);
 
     // Write the certificate to a file
-    FileOutputStream fs = new FileOutputStream(new File("Certificate.pem"));
+    FileOutputStream fs = new FileOutputStream("Certificate.pem");
     fs.write(keyPair.getPublic().toString().getBytes());
     fs.close();
 
     // Return the signed certificate from the X509CertificateHolder by converting to X509Certificate
     X509Certificate cert = new JcaX509CertificateConverter().getCertificate(certificate);
-    X509Certificate[] certChain = new X509Certificate[]{cert};
 
-    return certChain;
+    return new X509Certificate[]{cert};
   }
 }
