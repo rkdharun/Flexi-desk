@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="67c52bb8-393d-467a-a5ab-0a42c30786d0" name="Changes" comment="ADDED: java docs" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
-    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true"
-      nameIsGenerated="true">
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="flexi.MainApp" />
       <module name="flexi" />
       <extension name="coverage">
@@ -40,5 +51,17 @@
   </component>
   <component name="SvnConfiguration">
     <configuration />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Flexi_desk$com_github_rkdharun_flexidesk_MainApp.ic" NAME="com.github.rkdharun.flexidesk.MainApp Coverage Results" MODIFIED="1693864502629" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>flexi.*</FILTER>
+    </SUITE>
   </component>
 </project>
