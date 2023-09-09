@@ -1,37 +1,42 @@
 package com.github.rkdharun.flexidesk.network.io;
 
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.io.IOException;
+import java.net.*;
 
 public class BroadcastReceiver {
+  DatagramSocket socket;
+
+  public DatagramPacket receiveBroadcast(int port) {
 
 
-  public int receiveBroadcast(int port) {
+    DatagramPacket receivePacket = null;
+
     try {
 
-      DatagramSocket socket = new DatagramSocket(port, InetAddress.getByName("0.0.0.0"));
-
+      socket = new DatagramSocket(port, InetAddress.getByName("0.0.0.0"));
       socket.setBroadcast(true);
-
+      socket.setReuseAddress(true);
       byte[] receiveData = new byte[1024];
-
       System.out.println("Receiver waiting for broadcast...");
-      while (true) {
-        DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-        socket.receive(receivePacket);
+      receivePacket = new DatagramPacket(receiveData, receiveData.length);
+      socket.receive(receivePacket);
+      String message = new String(receivePacket.getData(), 0, receivePacket.getLength());
+      System.out.println("Received Message  : " + message);
+      return receivePacket;
 
-        String message = new String(receivePacket.getData(), 0, receivePacket.getLength());
-        System.out.println("Received: " + message);
-        System.out.println("ADDRESS AND PORT :" + receivePacket.getAddress() + " on port  : " + receivePacket.getPort());
-
-
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (IOException e) {
+      System.out.println("Closed Receiver ");
+      return null;
     }
-    return 1;
+
+  }
+
+  public void close() {
+    if(socket != null) {
+      socket.close();
+      System.out.println("Address closed\n");
+    }
   }
 }
 

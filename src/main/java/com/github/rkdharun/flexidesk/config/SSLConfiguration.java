@@ -60,19 +60,14 @@ public class SSLConfiguration {
       keyManagerFactory.init(keyStore, AppConstant.CERTIFICATE_PASSWORD.toCharArray());
 
       //initialize the ssl context
-      sslContext.init(keyManagerFactory.getKeyManagers(),
-        new TrustManager[]{new DefaultTrustManager()}, new SecureRandom());
+      sslContext.init(keyManagerFactory.getKeyManagers(), new TrustManager[]{new DefaultTrustManager()}, new SecureRandom());
 
       //get ServerSocketFactory object for ssl server creation
       sslServerSocketFactory = sslContext.getServerSocketFactory();
 
     } catch (Exception e) {
-     e.printStackTrace();
+      e.printStackTrace();
     }
-  }
-
-  public SSLContext getSslContext() {
-    return sslContext;
   }
 
   public static int getAppMode() {
@@ -83,9 +78,10 @@ public class SSLConfiguration {
     return sslServerSocketFactory;
   }
 
-
-  public SSLSocket getSslSocket() {
-    return sslSocket;
+  public SSLSocketFactory getSslSocketFactory() {
+    return sslContext.getSocketFactory();
   }
+
+
 }
 

@@ -22,6 +22,12 @@ public class Server {
     sslConfiguration = new SSLConfiguration();
   }
 
+
+  public void initConfiguration() {
+    sslConfiguration.setDefaultCertificate();
+  }
+
+
   public void start() {
     new Thread(() -> {
       MainApp.currentThreadCounts += 1;
@@ -30,7 +36,6 @@ public class Server {
         sslServerSocket = (SSLServerSocket) sslConfiguration.getSslServerSocketFactory().createServerSocket(0);
         setPort(sslServerSocket.getLocalPort());
         sslServerSocket.setNeedClientAuth(true);
-
 
         new Thread(this::acceptConnections).start();
 
@@ -45,10 +50,7 @@ public class Server {
 
   }
 
-  public void initConfiguration() {
-    sslConfiguration.setDefaultCertificate();
 
-  }
 
   public void acceptConnections() {
     while (true) {

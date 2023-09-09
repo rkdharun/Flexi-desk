@@ -5,6 +5,7 @@ import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.utilities.FXMLoader;
 
 import java.io.IOException;
+import java.lang.annotation.Documented;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,10 +26,11 @@ import javafx.scene.control.Button;
 public class PrimaryFXMLController implements Initializable {
 
   @FXML
-  public VBox addressVbox;
-  public ImageView img_qrCode;
-
-  public Label lbl_Info;
+  private VBox addressVbox;
+  @FXML
+  private ImageView img_qrCode;
+  @FXML
+  private Label lbl_Info;
 
   @FXML
   private Button btnCreate;
@@ -36,15 +38,20 @@ public class PrimaryFXMLController implements Initializable {
   @FXML
   private Button btnJoin;
 
-  //packgae function for loading FXML Loader
-
+  //packgae  loading FXML Loader
   FXMLoader fl;
+
   FXMLLoader qrPane;
+
+  FXMLLoader clientPane;
   @FXML
   Pane qrUI;
+
+  @FXML
+  Pane clientUI;
+
   @FXML
   private BorderPane mainBorderPane;
-
 
   @FXML
   private void createNetwork() {
@@ -81,24 +88,33 @@ public class PrimaryFXMLController implements Initializable {
 
   }
 
+  /**
+   * Loads the clientPage.fxml file at the center in border pane
+   */
   public void joinNetwork() {
     MainApp.applicationController.stopServer();
+    clientPane = fl.getPage("clientPage");
+    try {
+      clientUI =clientPane.load();
+      mainBorderPane.setCenter(clientUI);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
     btnCreate.setMinHeight(35);
-    System.out.println("Hi biro");
     btnJoin.setMinHeight(40);
   }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+
+    //FXMLoader for loading fxml pages
     fl = new FXMLoader();
-    //get the QR page
-
-
   }
 
   public void closeApp(MouseEvent mouseEvent) {
     MainApp.applicationController.stopServer();
-
+    MainApp.applicationController.stopClient();
     System.exit(0);
   }
 }

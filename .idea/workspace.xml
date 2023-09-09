@@ -5,29 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="UPDATE: integrated the broadcast sender and server">
-      <change afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ClientPageFXMLController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/gui/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Certificate.pem" beforeDir="false" afterPath="$PROJECT_DIR$/Certificate.pem" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/design/protocols.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/design/protocols.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbactions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbactions.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal.png" beforeDir="false" afterPath="$PROJECT_DIR$/portal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/config/ConnectionConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/config/SSLConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/config/SSLConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/config/SSLConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/PrimaryFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/PrimaryFXMLController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/BroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/BroadcastReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/BroadcastSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/BroadcastSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/FXMLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/FXMLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/QRGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/QRGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/SelfSignedCertificateGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/SelfSignedCertificateGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/clientPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/clientPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/primary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/primary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/qrpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/qrpage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +38,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="jar://C:/Program Files/Java/jdk-17/lib/src.zip!/java.base/java/lang/NumberFormatException.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/resources/fxml/primary.fxml" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -74,11 +64,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "OverrideImplement.generate.javadoc": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230908_0003",
+    "com.google.cloudcode.ide_session_index": "20230909_0002",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/Source/Flexi-desk/src/main/resources/images/icons",
@@ -87,7 +78,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -135,6 +126,7 @@
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
+            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
@@ -146,6 +138,9 @@
             <option name="pomFileName" value="pom.xml" />
             <option name="profilesMap">
               <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -185,6 +180,8 @@
       <option name="presentableId" value="Default" />
       <updated>1693076501894</updated>
       <workItem from="1694188263407" duration="3067000" />
+      <workItem from="1694264453738" duration="171000" />
+      <workItem from="1694275916570" duration="21000" />
     </task>
     <task id="LOCAL-00001" summary="Added Controller">
       <created>1693076862050</created>
@@ -221,7 +218,21 @@
       <option name="project" value="LOCAL" />
       <updated>1694026826291</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="UPDATE: integrated the broadcast sender and server">
+      <created>1694202729856</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1694202729856</updated>
+    </task>
+    <task id="LOCAL-00007" summary="UPDATE: integrated the broadcast sender and server">
+      <created>1694202755960</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1694202755960</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
