@@ -44,6 +44,7 @@ public class ApplicationController {
     return server;
   }
 
+
   /**
    * stops the server  if it is not null
    */

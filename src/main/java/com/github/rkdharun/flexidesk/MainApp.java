@@ -24,6 +24,10 @@ public class MainApp extends Application {
 
   public static DatagramSocket broadcastSocket;
 
+  /**
+   * handles the mouse drag event on the stage to move the stage
+   * @param me
+   */
   private static void handle(MouseEvent me) {
     if (me.getButton() != MouseButton.MIDDLE) {
 
@@ -32,6 +36,10 @@ public class MainApp extends Application {
     }
   }
 
+  /**
+   * handles the mouse press event on the stage to find the position
+   * @param me
+   */
   private static void handle2(MouseEvent me) {
     if (me.getButton() != MouseButton.MIDDLE) {
       initialY = me.getSceneY();
@@ -39,11 +47,12 @@ public class MainApp extends Application {
     }
   }
 
-  @Override
-  public void start(@SuppressWarnings("exports") Stage s) throws IOException {
-    stage = s;
-    setRoot("primary", "Flexi");
-  }
+  /**
+   *
+   * @param fxml fxml file to be loaded
+   * @param title title of the stage
+   * @throws IOException
+   */
 
   static void setRoot(String fxml, String title) throws IOException {
     Scene scene = new Scene(loadFXML(fxml));
@@ -58,19 +67,39 @@ public class MainApp extends Application {
     stage.show();
   }
 
+  /**
+   * Loads the FXML File
+   * @param fxml
+   * @return returns the Parent object
+   * @throws IOException
+   */
   private static Parent loadFXML(String fxml) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/fxml/" + fxml + ".fxml"));
     return fxmlLoader.load();
+  }
+
+  /**
+   * Starts the application
+   * @param s stage object
+   * @throws IOException
+   */
+  @Override
+  public void start(@SuppressWarnings("exports") Stage s) throws IOException {
+    stage = s;
+    setRoot("primary", "Flexi");
   }
 
   public static void main(String[] args) {
 
     applicationController = new ApplicationController();
     try {
+      //initializing broadcast socket here to fix the QR generation delay
       broadcastSocket = new DatagramSocket(0);
     } catch (SocketException e) {
       throw new RuntimeException(e);
     }
+
+    //launches the application
     launch(args);
 
   }

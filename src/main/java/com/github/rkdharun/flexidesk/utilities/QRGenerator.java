@@ -22,11 +22,13 @@ import java.util.Hashtable;
 public class QRGenerator {
   public static Image createQRImage(String qrCodeText, int size)
     throws WriterException, IOException {
+
     // Create the ByteMatrix for the QR-Code that encodes the given String
     Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<>();
     hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
     QRCodeWriter qrCodeWriter = new QRCodeWriter();
     BitMatrix byteMatrix = qrCodeWriter.encode(qrCodeText, BarcodeFormat.QR_CODE, size, size, hintMap);
+
     // Make the BufferedImage that are to hold the QRCode
     int matrixWidth = byteMatrix.getWidth();
     BufferedImage image = new BufferedImage(matrixWidth, matrixWidth, BufferedImage.TYPE_INT_RGB);
@@ -34,6 +36,7 @@ public class QRGenerator {
     Graphics2D graphics = (Graphics2D) image.getGraphics();
     graphics.setColor(Color.BLACK);
     graphics.fillRect(0, 0, matrixWidth, matrixWidth);
+
     // Paint and save the image using the ByteMatrix
     graphics.setColor(Color.WHITE);
 
@@ -49,6 +52,11 @@ public class QRGenerator {
     return convertToFxImage(image);
   }
 
+
+  /**
+   * @param image a BufferedImage object
+   * @return an Image object of javafx.scene.image.Image type
+   */
   private static Image convertToFxImage(BufferedImage image) {
     WritableImage wr = null;
     if (image != null) {
@@ -60,7 +68,6 @@ public class QRGenerator {
         }
       }
     }
-
     return new ImageView(wr).getImage();
   }
 }
