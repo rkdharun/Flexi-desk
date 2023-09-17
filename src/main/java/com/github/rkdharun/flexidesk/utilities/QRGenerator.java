@@ -20,6 +20,15 @@ import java.util.Hashtable;
 
 
 public class QRGenerator {
+
+  /**
+   *
+   * @param qrCodeText message that should be converted to QR code
+   * @param size size of the image
+   * @return Image object
+   * @throws WriterException
+   * @throws IOException
+   */
   public static Image createQRImage(String qrCodeText, int size)
     throws WriterException, IOException {
 
@@ -47,7 +56,7 @@ public class QRGenerator {
         }
       }
     }
-    ImageIO.write(image, "png", new File("portal.png"));
+    //ImageIO.write(image, "png", new File("portal.png"));
 
     return convertToFxImage(image);
   }

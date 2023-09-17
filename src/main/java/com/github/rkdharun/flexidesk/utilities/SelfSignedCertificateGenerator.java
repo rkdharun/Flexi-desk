@@ -30,7 +30,7 @@ public class SelfSignedCertificateGenerator {
 
     // Generate Key Pair
     KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA", "BC");
-    keyPairGenerator.initialize(2048); // Change the key size as needed
+    keyPairGenerator.initialize(1024); // Change the key size as needed
     keyPair = keyPairGenerator.generateKeyPair();
 
     // Generate Certificate

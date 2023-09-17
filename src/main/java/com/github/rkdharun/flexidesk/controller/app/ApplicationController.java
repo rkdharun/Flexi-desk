@@ -3,27 +3,27 @@ package com.github.rkdharun.flexidesk.controller.app;
 import com.github.rkdharun.flexidesk.network.io.BroadcastReceiver;
 import com.github.rkdharun.flexidesk.network.io.Client;
 import com.github.rkdharun.flexidesk.network.io.Server;
+import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
 
 import java.net.DatagramPacket;
-import java.net.InetAddress;
 
 public class ApplicationController {
   Server server = null;
   Client client = null;
 
-  BroadcastReceiver br = null;
+  public BroadcastReceiver br = null;
+
 
   /**
    * Creates a new Server Object and closes any previous servers and clients
    * and initiates a new ssl configuration
+   *
+   * @param broadcastPort port number in which the broadcast to be sent ,i.e the destination
    */
-  public void createServer() {
+  public void createServer(int broadcastPort) {
 
-    //close any previously running clients or servers
-    if(client!=null)
-      client.disconnect();
-    if (server != null)
-      server.close();
+
+    resetApplication();
 
     //create a new Server Object
     server = new Server();
@@ -32,8 +32,57 @@ public class ApplicationController {
     server.initConfiguration();
 
     //start the server
-    server.start();
+    server.start(broadcastPort);
 
+  }
+
+
+  /**
+   * Waits for broadcast and initialize tcp connection whwn received using the broadcast message
+   *
+   */
+  public void join() {
+
+    //close running process (server or client)
+    resetApplication();
+
+    //create a new broadcast receiver
+    br = new BroadcastReceiver();
+
+    //create a new client object
+    client = new Client();
+
+    //create a new ssl configuration for client
+    client.initConfiguration();
+
+    System.out.println("Going inside the broadcast receive and connect code :: active Threads :: "+Thread.activeCount()+Thread.currentThread().getStackTrace()[1]);
+
+
+    //start receiving broadcast and wait for broadcast message  and initialize tcp connection when received using the broadcast message
+    new Thread(() -> {
+      //this line blocks further execution until a broadcast is received
+      DatagramPacket ipData = br.receiveBroadcast();
+
+      //check if packet is received
+      if (ipData == null) return;
+
+      int tcp_port = Integer.parseInt(new String(ipData.getData()).trim());
+      System.out.println("Server found at Ip: " + ipData.getAddress() + " port : " + tcp_port);
+
+      try {
+        client.joinNetwork(ipData.getAddress(), tcp_port);
+
+        //returns to the thread after joining the network or when client disconnect
+      } catch (ServerNotFoundException e) {
+        e.printStackTrace();
+      }
+      finally {
+        System.out.println(" Outside the broadcast receive and connect code Thread :: active Threads :: "+Thread.activeCount()+Thread.currentThread().getStackTrace()[1]);
+
+      }
+
+    }).start();
+    System.out.println(" Outside the broadcast receive and connect code :: active Threads :: "+Thread.activeCount()+Thread.currentThread().getStackTrace()[1]);
   }
 
 
@@ -46,51 +95,22 @@ public class ApplicationController {
 
 
   /**
-   * stops the server  if it is not null
+   * Calls the disconnect method in client object
+   */
+  public void stopClient() {
+    if (client != null) client.disconnect();
+  }
+
+  /**
+   * Stops the server  if it is not null
    */
   public void stopServer() {
     if (server != null) server.close();
   }
 
-
-  /**
-   * Discovers broadcast and initialize tcp connection
-   * @param port port number that the broadcast receiver uses to receive connection information
-   * */
-  public void join(int port) {
-    //close previous connections
-    if(server!=null) server.close();
-    if(client!=null) client.disconnect();
-
-    //create a new client object
-    client = new Client();
-
-    //create a new ssl configuration for client
-    client.initConfiguration();
-
-    //closes any running broadcast receivers
-    if(br!=null)br.close();
-
-    //create a new broadcast receiver
-    br = new BroadcastReceiver();
-
-    //start receiving the broadcast
-    DatagramPacket ipData = br.receiveBroadcast(port); //this line blocks further execution untill a broadcast is received
-    //check if packet is received
-    if(ipData == null) return;
-    System.out.println("going against return");
-    int tcp_port = Integer.parseInt(new String(ipData.getData()).trim());
-    System.out.println("Received data of tcp port: "+tcp_port);
-    System.out.println("Ip address found : "+ipData.getAddress());
-    client.joinNetwork(ipData.getAddress(),tcp_port);
-
-
-  }
-
-  /**
-   * calls the disconnect method in client object
-   */
-  public void stopClient() {
-    if(client!=null)client.disconnect();
+  public void resetApplication(){
+    if(br!=null) br.close();
+    stopClient();
+    stopServer();
   }
 }

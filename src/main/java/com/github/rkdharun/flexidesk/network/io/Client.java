@@ -1,6 +1,7 @@
 package com.github.rkdharun.flexidesk.network.io;
 
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
+import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -12,48 +13,86 @@ public class Client {
   SSLConfiguration sslConfiguration;
   SSLSocket sslSocket;
 
+  /**
+   * Create a new SSL configuration
+   */
   public Client() {
     sslConfiguration = new SSLConfiguration();
   }
 
+  /**
+   * set default certificate
+   */
   public void initConfiguration() {
     sslConfiguration.setDefaultCertificate();
   }
 
-  public void joinNetwork(InetAddress ip, int port) {
-    // Create SSL socket factory and socket
+  /**
+   *  Connects to the server and handles the connection is seperate thread
+   * @param ip  ip address of the server
+   * @param port port number of the server
+   * @throws ServerNotFoundException thrown when there is no server in the given ip:port
+   */
+  public void joinNetwork(InetAddress ip, int port) throws ServerNotFoundException {
+
+    // get the ssl socket factory from the created ssl configuration
     SSLSocketFactory sslSocketFactory = sslConfiguration.getSslSocketFactory();
 
+
     try {
-      String ipA = Arrays.toString(ip.getAddress());
-      System.out.println("IP Address inside "+ipA);
+      //create a ssl socket with the specified ip and port
       sslSocket = (SSLSocket) sslSocketFactory.createSocket(ip, port);
+
+      //set client authentication to true so that the server can verify the client with ssl certificate
       sslSocket.setNeedClientAuth(true);
+
+      System.out.println("Passing to Connection handler :: active Threads :: "+Thread.activeCount());
+      //new Thread to handle the connection
       new Thread(new ConnectionHandler(sslSocket)).start();
+      System.out.println("Control passed to Connection handler :: active Threads :: "+Thread.activeCount()+Thread.currentThread().getStackTrace()[1]);
+
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
+      throw new ServerNotFoundException("Server Not Found");
     }
+
   }
 
+  /**
+   *
+   * @return return the ssl socket
+   */
   public SSLSocket getSslSocket() {
     return this.sslSocket;
   }
 
+
+  /**
+   * Disconnects from the server by closing the ssl socket.
+   */
   public void disconnect() {
     try {
-      if(this.getSslSocket()!=null)
+      if(this.getSslSocket()!=null){
+        //close the ssl socket
         this.getSslSocket().close();
+        System.out.println("Client Disconnected");
+
+      }
     } catch (IOException e) {
       e.printStackTrace();
     } catch (NullPointerException e) {
       e.printStackTrace();
-      System.out.println("Nothing to worrry");
+    }
+    finally {
+      System.out.println("Client Disconnected from server :: "+Thread.activeCount()+" "+Thread.currentThread().getStackTrace()[1]);
+
     }
   }
 
+
 }
 
-
+// program for handling the connection
 class ConnectionHandler implements Runnable {
 
   SSLSocket sslSocket;
@@ -64,6 +103,8 @@ class ConnectionHandler implements Runnable {
 
   @Override
   public void run() {
+
+    System.out.println("Active threads are :"+Thread.activeCount()+"Running thread : "+Thread.currentThread().getStackTrace()[1]);
     OutputStream os = null;
     try {
 
@@ -76,22 +117,23 @@ class ConnectionHandler implements Runnable {
 
       while (flag != 1) {
         msg = br.readLine();
-        try {
-          os.write(msg.getBytes());
-          is.read(buff);
-        } catch (IOException e) {
-          throw new RuntimeException(e);
-        }
-
+        os.write(msg.getBytes());
+        is.read(buff);
         System.out.println("Response : " + new String(buff).trim());
         msg = br.readLine();
         flag = Integer.parseInt(msg);
         System.out.println(flag);
       }
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
 
+      if(sslSocket!=null) sslSocket.close();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    finally {
+
+      System.out.println("Connection Handler Closed  :: " +Thread.activeCount());
+    }
   }
 }
 //--------------------------------------------------------------------------------------

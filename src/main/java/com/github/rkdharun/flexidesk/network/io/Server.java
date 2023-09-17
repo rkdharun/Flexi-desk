@@ -2,13 +2,12 @@ package com.github.rkdharun.flexidesk.network.io;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
-import com.github.rkdharun.flexidesk.utilities.QRGenerator;
-import com.google.zxing.WriterException;
 
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 
 public class Server {
@@ -18,90 +17,138 @@ public class Server {
   private final SSLConfiguration sslConfiguration;
   private BroadcastSender bs;
 
+  private SSLSocket currentSslSocket;
+
+  /**
+   * creates a new server object and initiates a new ssl configuration
+   */
   public Server() {
     sslConfiguration = new SSLConfiguration();
   }
 
-
+  /**
+   * set default certificate for the server
+   */
   public void initConfiguration() {
     sslConfiguration.setDefaultCertificate();
   }
 
 
-  public void start() {
+  /**
+   * creates a serverSocket and wait for connection while sending a broadcast with server port to the specified broadcastPnort so,
+   * that a client can perform an udp discovery
+   *
+   * @param broadcastPort port number in which the broadcast to be sent ,i.e the destination
+   */
+  public void start(int broadcastPort) {
+
+    //Thread for connecting to the server. This thread will be stopped once the connection is established
     new Thread(() -> {
-      MainApp.currentThreadCounts += 1;
       try {
+
+        //create a new broadcast sender
         bs = new BroadcastSender();
+
+        //create a server socket
         sslServerSocket = (SSLServerSocket) sslConfiguration.getSslServerSocketFactory().createServerSocket(0);
-        setPort(sslServerSocket.getLocalPort());
+
+        this.setPort(sslServerSocket.getLocalPort());
+        System.out.println("Server Started at port " + getPort());
+
+        //set client authentication to true so that the server can verify the client with ssl certificate
         sslServerSocket.setNeedClientAuth(true);
 
-        new Thread(this::acceptConnections).start();
+        //start accepting connections from client
+        acceptConnections(broadcastPort);
 
-        System.out.println("Ready To accept Conections");
       } catch (Exception e) {
         e.printStackTrace();
 
       }
-      MainApp.currentThreadCounts -= 1;
+
+      //print the active threads
+//      Thread[] tarray = new Thread[Thread.activeCount()];
+//      Thread.enumerate(tarray);
+//      for (Thread tq : tarray)
+//        System.out.println(tq.getName());
 
     }).start();
 
   }
 
+  /**
+   *   accepts connection from client runs in a separate thread,
+   *   the server sends a broadcast to the specified port and waits for the client to receive the broadcast and initiate a TCP connection
+   *   with the server by using the information provided in the broadcast message (ip and port)
+   * @param broadcastPort port number in which the broadcast to be sent ,i.e the destination
+   *
+   */
 
-
-  public void acceptConnections() {
-    while (true) {
-      SSLSocket sslSocket;
+  public void acceptConnections(int broadcastPort) {
       try {
-        bs.startBroadcasting(String.valueOf(sslServerSocket.getLocalPort()));
-        sslSocket = (SSLSocket) sslServerSocket.accept();
+        System.out.println("Active threads are :" + Thread.activeCount());
+        //start broadcasting
+        new Thread(new Runnable() {
+          @Override
+          public void run() {
+            bs.startBroadcasting(String.valueOf(sslServerSocket.getLocalPort()), broadcastPort);
+          }
+        }).start();
+
+        System.out.println("Waiting for conenctions");
+        System.out.println("Active threads are :" + Thread.activeCount());
+        //accept connection from client
+        currentSslSocket = (SSLSocket) sslServerSocket.accept();
+
+        //stop broadcasting to avoid further connections
         bs.stopBroadcasting();
-        Thread t1 = new Thread(new ClientHandler(sslSocket));
-        t1.start();
+
+        //create a new thread to handle the client connection
+        new Thread(new ClientHandler(currentSslSocket));
 
 
+        System.out.println("Active threads are :" + Thread.activeCount());
         System.out.println("Connection ACcepted");
 
       } catch (IOException e) {
-        if (sslServerSocket.isClosed()) break;
+        // check if serversocket is closed and break the loop for stopping any further connections to the same sever
+        if (sslServerSocket.isClosed()) ;
       }
-    }
+
   }
 
-
-  public javafx.scene.image.Image getQR() {
-    try {
-      String message = this.getPort() + ":" + bs.getBroadcastPort();
-      System.out.println(message);
-      return QRGenerator.createQRImage(message, 500);
-    } catch (WriterException | IOException e) {
-      System.out.println(e.getMessage());
-    }
-    return null;
-  }
 
   public void setPort(int port) {
-
     this.port = port;
   }
 
+  /**
+   *
+   * @return port number of the server
+   */
   public int getPort() {
-    return port;
+    return this.port;
   }
 
 
+  /**
+   * stops the server  if it is not null and stop broadcasting
+   */
   public void close() {
     try {
       if (sslServerSocket != null) {
+        //close the server socket and stop broadcasting
         sslServerSocket.close();
+        System.out.println("sslServerSocket closed");
         bs.stopBroadcasting();
+        System.out.println("server closed and broadcasting stopped");
       }
-
+      if(currentSslSocket != null) {
+        currentSslSocket.close();
+        System.out.println("connection sokcet is closed");
+      }
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
     }
   }
 }
@@ -114,26 +161,26 @@ class ClientHandler implements Runnable {
     this.sslSocket = sslSocket;
   }
 
+
+  //handles the client connection
   @Override
   public void run() {
+    System.out.println("Active threads are :" + Thread.activeCount());
     MainApp.currentThreadCounts += 1;
     try {
       System.out.println("reading from client");
       InputStream is = sslSocket.getInputStream();
       OutputStream os = sslSocket.getOutputStream();
       byte[] buff = new byte[1000];
-
       while (is.read(buff) != -1) {
         os.write(buff);
       }
 
     } catch (Exception e) {
       sslSocket = null;
-      System.out.println(e.getMessage());
-      return;
-
+      System.out.println("ERROR MESSAGE ON CLIENT HANDLER :: "  +e.getMessage());
     }
+    System.out.println("Active threads are :" + Thread.activeCount());
 
-    MainApp.currentThreadCounts -= 1;
   }
 }

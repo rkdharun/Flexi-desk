@@ -1,8 +1,5 @@
 package com.github.rkdharun.flexidesk.network.io;
 
-
-import com.github.rkdharun.flexidesk.MainApp;
-
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -13,41 +10,50 @@ import java.util.Objects;
 
 public class BroadcastSender {
 
-  public boolean startBroadcast = false;
 
-  public DatagramSocket socket = MainApp.broadcastSocket;
 
-  public void startBroadcasting(String msg) {
+  public DatagramSocket socket ;
+
+  /**
+   * Start broadcasting (starts a thread that send broadcast continously)
+   * @param msg message to be broadcasted
+   */
+  public void startBroadcasting(String msg,int port) {
     try {
-      startBroadcast = true;
-      broadcast(msg, InetAddress.getByName("255.255.255.255"));
+      socket = new DatagramSocket(0);
+      broadcast(msg, port);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
 
-  public void broadcast(String broadcastMessage, InetAddress address) throws IOException {
+  /**
+   * (starts a thread that send broadcast continously)
+   * @param broadcastMessage message that should be broadcasted
+   * @param port  destination port of the broadcast
+   * @throws IOException
+   */
+  public void broadcast(String broadcastMessage, int port) throws IOException {
 
-    System.out.println("Broadcasting in port " + socket.getLocalPort());
+    System.out.println("Broadcasting in port " + port);
     socket.setReuseAddress(true);
     socket.setBroadcast(true);
 
     byte[] buffer = broadcastMessage.getBytes();
 
-    new Thread(() -> {
-      while (startBroadcast) {
+      while (true) {
 
         try {
           for (var addr : listAllBroadcastAddresses()) {
-            DatagramPacket packet = new DatagramPacket(buffer, buffer.length, addr, 8888);
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length, addr, port);
             socket.send(packet);
           }
-          Thread.currentThread().join(1500);
-        } catch (IOException | InterruptedException e) {
-          throw new RuntimeException(e);
+        } catch (IOException e) {
+          e.printStackTrace();
+          System.out.println("Error Message :: "+ e.getMessage());
+          break;
         }
       }
-    }).start();
   }
 
   private List<InetAddress> listAllBroadcastAddresses() throws SocketException {
@@ -74,7 +80,9 @@ public class BroadcastSender {
     return socket.getLocalPort();
   }
 
+
   public void stopBroadcasting() {
-    startBroadcast = false;
+    socket.close();
+
   }
 }
