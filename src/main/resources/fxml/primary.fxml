@@ -21,7 +21,7 @@
     <Cursor fx:constant="DEFAULT" />
   </cursor>
   <left>
-    <HBox maxHeight="-Infinity" minHeight="100.0" prefHeight="457.0" prefWidth="130.0" BorderPane.alignment="CENTER">
+    <HBox maxHeight="-Infinity" minHeight="100.0" prefHeight="458.0" prefWidth="106.0" BorderPane.alignment="CENTER">
       <children>
         <VBox alignment="CENTER" prefHeight="444.0" prefWidth="88.0" spacing="20.0" style="-fx-background-color: #222222; -fx-background-radius: 0px 0px  0px 15px;">
           <children>
@@ -71,12 +71,5 @@
          </children>
       </HBox>
    </top>
-   <center>
-      <VBox alignment="CENTER" prefHeight="467.0" prefWidth="542.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label prefHeight="18.0" prefWidth="310.0" text="Press Create to start a new connection" textFill="WHITE" />
-            <Label prefHeight="18.0" prefWidth="337.0" text=" or  click Join to connect with your friend" textFill="WHITE" />
-         </children>
-      </VBox>
-   </center>
+
 </BorderPane>

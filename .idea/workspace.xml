@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="UPDATE: Refactoring and thread management" />
+    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="UPDATE: Refactoring and thread management">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/gui/Progressbar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/infoCenter.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/icons/icon_close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/icons/icons/img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ChatPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ChatPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ClientPageFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ClientPageFXMLController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/PrimaryFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/PrimaryFXMLController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/BroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/BroadcastReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/BroadcastSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/BroadcastSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/FXMLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/FXMLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/chatPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/chatPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/clientPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/clientPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/primary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/primary.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +39,7 @@
       <list>
         <option value="JavaFXApplication" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -61,7 +83,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230917_0000",
+    "com.google.cloudcode.ide_session_index": "20230918_0001",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/Source/Flexi-desk/src/main/resources/images/icons",
@@ -74,7 +96,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "vcs.Git",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -224,7 +246,10 @@
       <workItem from="1694790855264" duration="5818000" />
       <workItem from="1694808206291" duration="919000" />
       <workItem from="1694827554722" duration="12157000" />
-      <workItem from="1694937241998" duration="5711000" />
+      <workItem from="1694937241998" duration="5963000" />
+      <workItem from="1694952354656" duration="3715000" />
+      <workItem from="1695011864530" duration="1911000" />
+      <workItem from="1695015191801" duration="8806000" />
     </task>
     <task id="LOCAL-00001" summary="Added Controller">
       <created>1693076862050</created>
@@ -299,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694952062331</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="UPDATE: Refactoring and thread management">
+      <option name="closed" value="true" />
+      <created>1694952116408</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1694952116408</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,7 +386,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java</url>
-          <line>22</line>
+          <line>26</line>
           <properties class="com.github.rkdharun.flexidesk.controller.app.ApplicationController" method="createServer">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

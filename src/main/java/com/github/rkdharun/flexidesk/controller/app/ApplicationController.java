@@ -1,10 +1,14 @@
 package com.github.rkdharun.flexidesk.controller.app;
 
-import com.github.rkdharun.flexidesk.network.io.BroadcastReceiver;
+import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.network.io.Client;
 import com.github.rkdharun.flexidesk.network.io.Server;
+import com.github.rkdharun.flexidesk.network.service.BroadcastReceiver;
+import com.github.rkdharun.flexidesk.utilities.FXMLoader;
 import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
+import javafx.application.Platform;
 
+import java.io.IOException;
 import java.net.DatagramPacket;
 
 public class ApplicationController {
@@ -39,7 +43,6 @@ public class ApplicationController {
 
   /**
    * Waits for broadcast and initialize tcp connection whwn received using the broadcast message
-   *
    */
   public void join() {
 
@@ -55,7 +58,7 @@ public class ApplicationController {
     //create a new ssl configuration for client
     client.initConfiguration();
 
-    System.out.println("Going inside the broadcast receive and connect code :: active Threads :: "+Thread.activeCount()+Thread.currentThread().getStackTrace()[1]);
+    System.out.println("Going inside the broadcast receive and connect code :: active Threads :: " + Thread.activeCount() + Thread.currentThread().getStackTrace()[1]);
 
 
     //start receiving broadcast and wait for broadcast message  and initialize tcp connection when received using the broadcast message
@@ -75,14 +78,13 @@ public class ApplicationController {
         //returns to the thread after joining the network or when client disconnect
       } catch (ServerNotFoundException e) {
         e.printStackTrace();
-      }
-      finally {
-        System.out.println(" Outside the broadcast receive and connect code Thread :: active Threads :: "+Thread.activeCount()+Thread.currentThread().getStackTrace()[1]);
+      } finally {
+        System.out.println(" Outside the broadcast receive and connect code Thread :: active Threads :: " + Thread.activeCount() + Thread.currentThread().getStackTrace()[1]);
 
       }
 
     }).start();
-    System.out.println(" Outside the broadcast receive and connect code :: active Threads :: "+Thread.activeCount()+Thread.currentThread().getStackTrace()[1]);
+    System.out.println(" Outside the broadcast receive and connect code :: active Threads :: " + Thread.activeCount() + Thread.currentThread().getStackTrace()[1]);
   }
 
 
@@ -93,6 +95,15 @@ public class ApplicationController {
     return server;
   }
 
+  public boolean getHasActiveConnection() {
+    return isActiveConnectionRunning;
+  }
+
+  public void setActiveConnectionRunning(boolean activeConnectionRunning) {
+    isActiveConnectionRunning = activeConnectionRunning;
+  }
+
+  private boolean isActiveConnectionRunning = false;
 
   /**
    * Calls the disconnect method in client object
@@ -108,9 +119,22 @@ public class ApplicationController {
     if (server != null) server.close();
   }
 
-  public void resetApplication(){
-    if(br!=null) br.close();
+  public void resetApplication() {
+    if (br != null) br.close();
     stopClient();
     stopServer();
+  }
+
+  public void revertMainUI() {
+    resetApplication();
+    Platform.runLater(() -> {
+      try {
+        MainApp.mainUI.setCenter(FXMLoader.getPage("infoCenter").load());
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    });
+
+
   }
 }

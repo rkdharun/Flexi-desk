@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="590.0" style="-fx-background-color: Transparent; -fx-background-radius: 15px 15px 15px 15px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.rkdharun.flexidesk.controller.ui.ClientPageFXMLController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="590.0" style="-fx-background-color: Transparent; -fx-background-radius: 15px 15px 15px 15px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.rkdharun.flexidesk.controller.ui.ClientPageFXMLController">
    <TextField fx:id="txtPortNumber" layoutX="148.0" layoutY="219.0" promptText="Enter port number">
       <font>
          <Font name="Segoe UI Italic" size="16.0" />

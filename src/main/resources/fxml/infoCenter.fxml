@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefHeight="400.0" prefWidth="600.0">-->
+  <VBox alignment="CENTER" prefHeight="467.0" prefWidth="542.0" BorderPane.alignment="CENTER">
+    <children>
+      <Label prefHeight="18.0" prefWidth="310.0" text="Press Create to start a new connection" textFill="WHITE" />
+      <Label prefHeight="18.0" prefWidth="337.0" text=" or  click Join to connect with your friend" textFill="WHITE" />
+    </children>
+  </VBox>
+
+<!--</AnchorPane>-->

@@ -36,10 +36,10 @@ public class PrimaryFXMLController implements Initializable {
   private Label lbl_Info;
 
   @FXML
-  private Button btnCreate;
+  public Button btnCreate;
 
   @FXML
-  private Button btnJoin;
+  public Button btnJoin;
 
   //packgae  loading FXML Loader
   FXMLoader fl;
@@ -56,17 +56,13 @@ public class PrimaryFXMLController implements Initializable {
   @FXML
   private BorderPane mainBorderPane;
 
+
+
   /**
    * Loads the qrPage.fxml file at the center in border pane
    */
   @FXML
   private void createQr() {
-//      Stage s = new Stage();
-//      FileChooser fileChooser = new FileChooser();
-//      fileChooser.setTitle("Select File");
-//      File f = fileChooser.showOpenDialog(s);
-
-
     MainApp.applicationController.join();
 
     //just adds a selection effect for the button
@@ -105,11 +101,11 @@ public class PrimaryFXMLController implements Initializable {
    */
   public void joinNetwork() {
 
+    MainApp.applicationController.resetApplication();
     //Load client fxml page Loader
     clientPane = fl.getPage("clientPage");
 
     try {
-
       //Load the page
       clientUI = clientPane.load();
 
@@ -144,15 +140,12 @@ public class PrimaryFXMLController implements Initializable {
 
     //FXMLoader for loading fxml pages
     fl = new FXMLoader();
-
     mainBorderPane.getTop().setOnMousePressed(this::handle2);
     mainBorderPane.getTop().setOnMouseDragged(this::handle);
 
-
-
-
-
   }
+
+
 
   //close function for the main Application
   public void closeApp(MouseEvent mouseEvent) {

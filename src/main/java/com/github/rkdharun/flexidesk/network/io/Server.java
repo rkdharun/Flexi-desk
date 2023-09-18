@@ -2,12 +2,12 @@ package com.github.rkdharun.flexidesk.network.io;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
+import com.github.rkdharun.flexidesk.network.service.BroadcastSender;
 
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 
 
 public class Server {
@@ -17,7 +17,7 @@ public class Server {
   private final SSLConfiguration sslConfiguration;
   private BroadcastSender bs;
 
-  private SSLSocket currentSslSocket;
+  private SSLSocket currentSslSocket = null;
 
   /**
    * creates a new server object and initiates a new ssl configuration
@@ -100,11 +100,12 @@ public class Server {
         //accept connection from client
         currentSslSocket = (SSLSocket) sslServerSocket.accept();
 
+        MainApp.applicationController.setActiveConnectionRunning(true);
         //stop broadcasting to avoid further connections
         bs.stopBroadcasting();
 
         //create a new thread to handle the client connection
-        new Thread(new ClientHandler(currentSslSocket));
+        new Thread(new ClientHandler(currentSslSocket,this)).start();
 
 
         System.out.println("Active threads are :" + Thread.activeCount());
@@ -117,6 +118,18 @@ public class Server {
 
   }
 
+
+  public SSLSocket getCurrentSslSocket() {
+    return currentSslSocket;
+  }
+
+  public void setCurrentSslSocket(SSLSocket socket){
+    this.currentSslSocket = socket;
+  }
+
+  public SSLServerSocket getSslServerSocket() {
+    return sslServerSocket;
+  }
 
   public void setPort(int port) {
     this.port = port;
@@ -145,28 +158,30 @@ public class Server {
       }
       if(currentSslSocket != null) {
         currentSslSocket.close();
-        System.out.println("connection sokcet is closed");
+        System.out.println("connection socket is closed");
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
+
 }
 
 
 class ClientHandler implements Runnable {
   private SSLSocket sslSocket;
-
-  public ClientHandler(SSLSocket sslSocket) {
+  private Server server;
+  public ClientHandler(SSLSocket sslSocket, Server server) {
     this.sslSocket = sslSocket;
+    this.server = server;
   }
 
 
   //handles the client connection
   @Override
   public void run() {
-    System.out.println("Active threads are :" + Thread.activeCount());
-    MainApp.currentThreadCounts += 1;
+    System.out.println(" Client handler Active threads are :" + Thread.activeCount());
+
     try {
       System.out.println("reading from client");
       InputStream is = sslSocket.getInputStream();
@@ -177,8 +192,10 @@ class ClientHandler implements Runnable {
       }
 
     } catch (Exception e) {
-      sslSocket = null;
+      server.setCurrentSslSocket(null);
       System.out.println("ERROR MESSAGE ON CLIENT HANDLER :: "  +e.getMessage());
+      MainApp.applicationController.revertMainUI();
+
     }
     System.out.println("Active threads are :" + Thread.activeCount());
 

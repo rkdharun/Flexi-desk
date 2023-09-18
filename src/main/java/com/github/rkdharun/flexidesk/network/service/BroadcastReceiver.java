@@ -1,4 +1,4 @@
-package com.github.rkdharun.flexidesk.network.io;
+package com.github.rkdharun.flexidesk.network.service;
 
 
 import com.github.rkdharun.flexidesk.utilities.QRGenerator;

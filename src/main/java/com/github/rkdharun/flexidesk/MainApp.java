@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -15,10 +16,12 @@ import java.io.IOException;
 public class MainApp extends Application {
 
   public static Stage stage;
+  public static BorderPane mainUI;
   public static double initialY;
   public static double initialX;
   public static int currentThreadCounts = 0;
   public static ApplicationController applicationController;
+
 
   /**
    *
@@ -28,7 +31,8 @@ public class MainApp extends Application {
    */
 
   static void setRoot(String fxml, String title) throws IOException {
-    Scene scene = new Scene(loadFXML(fxml));
+    mainUI = (BorderPane) loadFXML(fxml);
+    Scene scene = new Scene(mainUI);
     scene.setFill(Color.TRANSPARENT);
 
     stage.setScene(scene);
@@ -62,6 +66,7 @@ public class MainApp extends Application {
   }
 
   public static void main(String[] args) {
+
 
     //Initialize the application controller
     applicationController = new ApplicationController();
