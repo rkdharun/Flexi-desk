@@ -20,7 +20,7 @@ public class BroadcastSender {
    */
   public void startBroadcasting(String msg,int port) {
     try {
-      socket = new DatagramSocket(0);
+      socket = new DatagramSocket(8888);
       broadcast(msg, port);
     } catch (IOException e) {
       throw new RuntimeException(e);

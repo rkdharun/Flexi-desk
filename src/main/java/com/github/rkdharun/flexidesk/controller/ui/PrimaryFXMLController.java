@@ -3,6 +3,7 @@ package com.github.rkdharun.flexidesk.controller.ui;
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.utilities.FXMLoader;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,18 +13,15 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import org.bouncycastle.crypto.io.MacOutputStream;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static com.github.rkdharun.flexidesk.MainApp.*;
 
 
 public class PrimaryFXMLController implements Initializable {
@@ -57,12 +55,11 @@ public class PrimaryFXMLController implements Initializable {
   private BorderPane mainBorderPane;
 
 
-
   /**
    * Loads the qrPage.fxml file at the center in border pane
    */
   @FXML
-  private void createQr() {
+  private void joinNet() {
     MainApp.applicationController.join();
 
     //just adds a selection effect for the button
@@ -90,8 +87,35 @@ public class PrimaryFXMLController implements Initializable {
 
       lbl_Info.setText("SCAN TO CONNECT 0R USE : " + MainApp.applicationController.br.getBroadcastReceptionPort());
 
+      new Thread(() -> setChatUI()).start();
     } catch (IOException e) {
       throw new RuntimeException(e);
+    }
+
+
+  }
+
+
+  public void setChatUI(){
+
+    System.out.println("waiting for the client to join to server");
+    try {
+      MainApp.applicationController.clientJoinThread.join();
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+    System.out.println("waiting over for the client to join to server");
+    if (MainApp.applicationController.getClient() != null) {
+      if (MainApp.applicationController.getClient().getSslSocket().isConnected()) {
+        Platform.runLater(() -> {
+          try {
+            AnchorPane ap = FXMLoader.getPage("chatPage").load();
+            mainBorderPane.setCenter(ap);
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
+        });
+      }
     }
 
   }
@@ -99,7 +123,7 @@ public class PrimaryFXMLController implements Initializable {
   /**
    * Loads the clientPage.fxml file at the center in border pane
    */
-  public void joinNetwork() {
+  public void createQr() {
 
     System.out.println("Joining to the network");
     MainApp.applicationController.resetApplication();
@@ -127,15 +151,15 @@ public class PrimaryFXMLController implements Initializable {
   private void handle(MouseEvent me) {
     if (me.getButton() != MouseButton.MIDDLE) {
 
-      stage.getScene().getWindow().setX(me.getScreenX() - initialX);
-      stage.getScene().getWindow().setY(me.getScreenY() - initialY);
+      MainApp.stage.getScene().getWindow().setX(me.getScreenX() - MainApp.initialX);
+      MainApp.stage.getScene().getWindow().setY(me.getScreenY() - MainApp.initialY);
     }
   }
 
   private void handle2(MouseEvent me) {
     if (me.getButton() != MouseButton.MIDDLE) {
-      initialY = me.getSceneY();
-      initialX = me.getSceneX();
+      MainApp.initialY = me.getSceneY();
+      MainApp.initialX = me.getSceneX();
     }
   }
 
@@ -148,7 +172,6 @@ public class PrimaryFXMLController implements Initializable {
     mainBorderPane.getTop().setOnMouseDragged(this::handle);
 
   }
-
 
 
   //close function for the main Application

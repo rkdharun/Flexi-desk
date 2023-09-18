@@ -36,14 +36,11 @@ public class Server {
 
   /**
    * creates a serverSocket and wait for connection while sending a broadcast with server port to the specified broadcastPort so,
-   * that a client can perform an udp discovery
-   *
+   * that a client can perform an udp discovery and
+   * @implNote   Should be called inside the thread to avoid UI interruption
    * @param broadcastPort port number in which the broadcast to be sent ,i.e. the destination
    */
   public void start(int broadcastPort) {
-
-    //Thread for connecting to the server. This thread will be stopped once the connection is established
-
       try {
 
         //create a new broadcast sender
@@ -82,19 +79,14 @@ public class Server {
       try {
         System.out.println("Active threads are :" + Thread.activeCount());
         //start broadcasting
-        new Thread(new Runnable() {
-          @Override
-          public void run() {
-            bs.startBroadcasting(String.valueOf(sslServerSocket.getLocalPort()), broadcastPort);
-          }
-        }).start();
+
+        new Thread(() -> bs.startBroadcasting(String.valueOf(sslServerSocket.getLocalPort()), broadcastPort)).start();
 
         System.out.println("Waiting for connections");
         System.out.println("Active threads are :" + Thread.activeCount());
         //accept connection from client
         currentSslSocket = (SSLSocket) sslServerSocket.accept();
 
-        MainApp.applicationController.setActiveConnectionRunning(true);
         //stop broadcasting to avoid further connections
         bs.stopBroadcasting();
 
@@ -112,18 +104,10 @@ public class Server {
 
   }
 
-
-  public SSLSocket getCurrentSslSocket() {
-    return currentSslSocket;
-  }
-
   public void setCurrentSslSocket(SSLSocket socket){
     this.currentSslSocket = socket;
   }
 
-  public SSLServerSocket getSslServerSocket() {
-    return sslServerSocket;
-  }
 
   public void setPort(int port) {
     this.port = port;
@@ -186,7 +170,6 @@ class ClientHandler implements Runnable {
       }
 
     } catch (Exception e) {
-      server.setCurrentSslSocket(null);
       System.out.println("ERROR MESSAGE ON CLIENT HANDLER :: "  +e.getMessage());
 
 

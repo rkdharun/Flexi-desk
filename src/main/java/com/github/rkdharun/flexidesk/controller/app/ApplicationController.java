@@ -19,6 +19,7 @@ public class ApplicationController {
   public BroadcastReceiver br = null;
 
   public Thread serverStartThread;
+  public Thread clientJoinThread;
 
 
   /**
@@ -69,7 +70,7 @@ public class ApplicationController {
 
 
     //start receiving broadcast and wait for broadcast message  and initialize tcp connection when received using the broadcast message
-    new Thread(() -> {
+     clientJoinThread = new Thread(() -> {
       //this line blocks further execution until a broadcast is received
       DatagramPacket ipData = br.receiveBroadcast();
 
@@ -90,7 +91,8 @@ public class ApplicationController {
 
       }
 
-    }).start();
+    });
+     clientJoinThread.start();
     System.out.println(" Outside the broadcast receive and connect code :: active Threads :: " + Thread.activeCount() + Thread.currentThread().getStackTrace()[1]);
   }
 
@@ -143,5 +145,9 @@ public class ApplicationController {
       }
     });
 
+  }
+
+  public Client getClient() {
+    return client;
   }
 }

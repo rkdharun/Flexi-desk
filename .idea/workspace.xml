@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="ADDED: Chat UI and controller">
+    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="ADDED: UI CHANGE ON CONNECTION">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ClientPageFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ClientPageFXMLController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/PrimaryFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/PrimaryFXMLController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/BroadcastSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/BroadcastSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/chatPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/chatPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/primary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/primary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/icons/icon_close.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/icons/icon_close.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/icons/icons/img.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +240,7 @@
       <workItem from="1694937241998" duration="5963000" />
       <workItem from="1694952354656" duration="3715000" />
       <workItem from="1695011864530" duration="1911000" />
-      <workItem from="1695015191801" duration="17198000" />
+      <workItem from="1695015191801" duration="21668000" />
     </task>
     <task id="LOCAL-00001" summary="Added Controller">
       <created>1693076862050</created>
@@ -325,7 +331,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695024623917</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="ADDED: UI CHANGE ON CONNECTION">
+      <option name="closed" value="true" />
+      <created>1695042524226</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1695042524226</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,7 +383,8 @@
     <MESSAGE value="ADDED: BroadcastReceiver and Client" />
     <MESSAGE value="UPDATE: Refactoring and thread management" />
     <MESSAGE value="ADDED: Chat UI and controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADDED: Chat UI and controller" />
+    <MESSAGE value="ADDED: UI CHANGE ON CONNECTION" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED: UI CHANGE ON CONNECTION" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -380,7 +395,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java</url>
-          <line>29</line>
+          <line>30</line>
           <properties class="com.github.rkdharun.flexidesk.controller.app.ApplicationController" method="createServer">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -398,7 +413,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java</url>
-          <line>49</line>
+          <line>46</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>

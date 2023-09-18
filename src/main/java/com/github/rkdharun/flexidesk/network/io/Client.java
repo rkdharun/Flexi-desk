@@ -1,5 +1,6 @@
 package com.github.rkdharun.flexidesk.network.io;
 
+import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
 import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
 
@@ -131,7 +132,7 @@ class ConnectionHandler implements Runnable {
       e.printStackTrace();
     }
     finally {
-
+      MainApp.applicationController.revertMainUI();
       System.out.println("Connection Handler Closed  :: " +Thread.activeCount());
     }
   }

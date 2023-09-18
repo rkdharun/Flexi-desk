@@ -26,12 +26,12 @@
         <VBox alignment="CENTER" prefHeight="444.0" prefWidth="88.0" spacing="20.0" style="-fx-background-color: #222222; -fx-background-radius: 0px 0px  0px 15px;">
           <children>
             <Pane prefHeight="68.0" prefWidth="88.0" />
-            <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#createQr" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 0px 15px 15px 0px; -fx-background-color: #227FFF;" text="Create" textFill="WHITE">
+            <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#joinNet" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 0px 15px 15px 0px; -fx-background-color: #227FFF;" text="Join" textFill="WHITE">
               <font>
                 <Font name="Segoe UI Semibold" size="18.0" />
               </font>
             </Button>
-            <Button fx:id="btnJoin" mnemonicParsing="false" onAction="#joinNetwork" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 0px 15px 15px 0px; -fx-background-color: #227FFF;" text="Join" textFill="WHITE">
+            <Button fx:id="btnJoin" mnemonicParsing="false" onAction="#createQr" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 0px 15px 15px 0px; -fx-background-color: #227FFF;" text="Create" textFill="WHITE">
               <font>
                 <Font name="Segoe UI Semibold" size="18.0" />
               </font>

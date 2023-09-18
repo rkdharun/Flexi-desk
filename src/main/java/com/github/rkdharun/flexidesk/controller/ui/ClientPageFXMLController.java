@@ -2,25 +2,18 @@ package com.github.rkdharun.flexidesk.controller.ui;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.gui.Message;
-import com.github.rkdharun.flexidesk.gui.Progressbar;
 import com.github.rkdharun.flexidesk.utilities.FXMLoader;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.ImageCursor;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 
 import java.io.IOException;
 
 public class ClientPageFXMLController {
-  @FXML
-  private Button btnJoin;
+
   @FXML
   private TextField txtPortNumber;
 
@@ -29,7 +22,8 @@ public class ClientPageFXMLController {
 
 
   /**
-   * Retreives the port for broadcast listening and calls the join function in Application controller
+   * Retreives the port for broadcast listening and calls the createServer function in Application controller
+   * and updates the progress
    */
   public void joinNetwork() {
     //check for empty string
@@ -45,6 +39,9 @@ public class ClientPageFXMLController {
     }
   }
 
+  /**
+   * waits for the server creation thread for accepting a client and update the UI accordingly
+   */
   private void setChatUIOnConnection() {
     try {
       MainApp.applicationController.serverStartThread.join();
@@ -56,6 +53,9 @@ public class ClientPageFXMLController {
     }
   }
 
+  /**
+   * loads the chat page and update the center borderpane
+   */
   private void setChatUI() {
     anchorPane.getChildren().clear();
     FXMLLoader f = FXMLoader.getPage("chatPage");
@@ -67,7 +67,9 @@ public class ClientPageFXMLController {
     }
   }
 
-
+  /**
+   * shows a progress Indicator in center of BorderPane mainBorderPane
+   */
   private void showProgress() {
     anchorPane.getChildren().clear();
     ProgressIndicator pi = new ProgressIndicator();
