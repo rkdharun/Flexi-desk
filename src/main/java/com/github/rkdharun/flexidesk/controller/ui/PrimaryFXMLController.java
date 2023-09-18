@@ -101,13 +101,16 @@ public class PrimaryFXMLController implements Initializable {
    */
   public void joinNetwork() {
 
+    System.out.println("Joining to the network");
     MainApp.applicationController.resetApplication();
     //Load client fxml page Loader
     clientPane = fl.getPage("clientPage");
 
     try {
+
       //Load the page
       clientUI = clientPane.load();
+      System.out.println("loaded Client UI");
 
       //set in the center of the BorderPane (Main UI)
       mainBorderPane.setCenter(clientUI);
@@ -118,6 +121,7 @@ public class PrimaryFXMLController implements Initializable {
 
     btnCreate.setMinHeight(35);
     btnJoin.setMinHeight(40);
+    System.out.println("JOined");
   }
 
   private void handle(MouseEvent me) {

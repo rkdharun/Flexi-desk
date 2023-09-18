@@ -9,6 +9,7 @@ import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
 import javafx.application.Platform;
 
 import java.io.IOException;
+import java.io.PushbackInputStream;
 import java.net.DatagramPacket;
 
 public class ApplicationController {
@@ -16,6 +17,8 @@ public class ApplicationController {
   Client client = null;
 
   public BroadcastReceiver br = null;
+
+  public Thread serverStartThread;
 
 
   /**
@@ -36,7 +39,11 @@ public class ApplicationController {
     server.initConfiguration();
 
     //start the server
+    serverStartThread = new Thread(()->{
+
     server.start(broadcastPort);
+    });
+    serverStartThread.start();
 
   }
 
@@ -128,13 +135,13 @@ public class ApplicationController {
   public void revertMainUI() {
     resetApplication();
     Platform.runLater(() -> {
+      System.out.println("Inside platform run later that updates the infoCenter");
       try {
         MainApp.mainUI.setCenter(FXMLoader.getPage("infoCenter").load());
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
     });
-
 
   }
 }

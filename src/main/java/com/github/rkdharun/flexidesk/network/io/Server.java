@@ -35,15 +35,15 @@ public class Server {
 
 
   /**
-   * creates a serverSocket and wait for connection while sending a broadcast with server port to the specified broadcastPnort so,
+   * creates a serverSocket and wait for connection while sending a broadcast with server port to the specified broadcastPort so,
    * that a client can perform an udp discovery
    *
-   * @param broadcastPort port number in which the broadcast to be sent ,i.e the destination
+   * @param broadcastPort port number in which the broadcast to be sent ,i.e. the destination
    */
   public void start(int broadcastPort) {
 
     //Thread for connecting to the server. This thread will be stopped once the connection is established
-    new Thread(() -> {
+
       try {
 
         //create a new broadcast sender
@@ -66,13 +66,7 @@ public class Server {
 
       }
 
-      //print the active threads
-//      Thread[] tarray = new Thread[Thread.activeCount()];
-//      Thread.enumerate(tarray);
-//      for (Thread tq : tarray)
-//        System.out.println(tq.getName());
 
-    }).start();
 
   }
 
@@ -80,7 +74,7 @@ public class Server {
    *   accepts connection from client runs in a separate thread,
    *   the server sends a broadcast to the specified port and waits for the client to receive the broadcast and initiate a TCP connection
    *   with the server by using the information provided in the broadcast message (ip and port)
-   * @param broadcastPort port number in which the broadcast to be sent ,i.e the destination
+   * @param broadcastPort port number in which the broadcast to be sent ,i.e. the destination
    *
    */
 
@@ -95,7 +89,7 @@ public class Server {
           }
         }).start();
 
-        System.out.println("Waiting for conenctions");
+        System.out.println("Waiting for connections");
         System.out.println("Active threads are :" + Thread.activeCount());
         //accept connection from client
         currentSslSocket = (SSLSocket) sslServerSocket.accept();
@@ -109,10 +103,10 @@ public class Server {
 
 
         System.out.println("Active threads are :" + Thread.activeCount());
-        System.out.println("Connection ACcepted");
+        System.out.println("Connection AAccepted");
 
       } catch (IOException e) {
-        // check if serversocket is closed and break the loop for stopping any further connections to the same sever
+        // check if server-socket is closed and break the loop for stopping any further connections to the same sever
         if (sslServerSocket.isClosed()) ;
       }
 
@@ -194,7 +188,7 @@ class ClientHandler implements Runnable {
     } catch (Exception e) {
       server.setCurrentSslSocket(null);
       System.out.println("ERROR MESSAGE ON CLIENT HANDLER :: "  +e.getMessage());
-      MainApp.applicationController.revertMainUI();
+
 
     }
     System.out.println("Active threads are :" + Thread.activeCount());
