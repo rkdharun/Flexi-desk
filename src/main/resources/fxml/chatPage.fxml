@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #1c1c1c; -fx-background-radius: 15px 15px 15px 15px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.rkdharun.flexidesk.controller.ui.ChatPageController">
    <children>
-      <Button fx:id="btnSendFile" onAction="#sendFile" layoutX="341.0" layoutY="387.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="108.0" style="-fx-background-radius: 15px 15px 15px 15px; -fx-background-color: #227FFF;" text="Send File" textFill="WHITE">
+      <Button fx:id="btnSendFile" layoutX="341.0" layoutY="387.0" mnemonicParsing="false" onAction="#sendFile" prefHeight="48.0" prefWidth="108.0" style="-fx-background-radius: 15px 15px 15px 15px; -fx-background-color: #227FFF;" text="Send File" textFill="WHITE">
          <font>
             <Font name="Segoe UI Semibold" size="18.0" />
          </font>
@@ -25,15 +25,18 @@
          <children>
             <VBox alignment="TOP_RIGHT" prefHeight="336.0" prefWidth="482.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="433.0" />
+                  <HBox alignment="CENTER" prefHeight="28.0" prefWidth="482.0">
+                     <children>
+                        <Pane prefHeight="28.0" prefWidth="445.0" />
+                        <ImageView fx:id="icon_close" fitHeight="31.0" fitWidth="33.0" onMouseClicked="#closeSession" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/icon_close.png" />
+                           </image>
+                        </ImageView>
+                     </children></HBox>
                </children>
             </VBox>
          </children>
       </Pane>
-      <ImageView fx:id="icon_close" onMouseClicked="#closeSession" fitHeight="20.0" fitWidth="31.0" layoutX="542.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/icons/icon_close.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
