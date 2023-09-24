@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
 
 public class MainApp extends Application {
 
@@ -21,6 +22,7 @@ public class MainApp extends Application {
   public static double initialX;
   public static int currentThreadCounts = 0;
   public static ApplicationController applicationController;
+  public static ExecutorService executorService;
 
 
   /**

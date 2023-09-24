@@ -1,5 +1,6 @@
 package com.github.rkdharun.flexidesk.utilities;
 
+import com.github.rkdharun.flexidesk.constants.AppConstant;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.cert.X509CertificateHolder;
@@ -30,7 +31,7 @@ public class SelfSignedCertificateGenerator {
 
     // Generate Key Pair
     KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA", "BC");
-    keyPairGenerator.initialize(1024); // Change the key size as needed
+    keyPairGenerator.initialize(AppConstant.KEY_LENGTH); // Change the key size as needed
     keyPair = keyPairGenerator.generateKeyPair();
 
     // Generate Certificate

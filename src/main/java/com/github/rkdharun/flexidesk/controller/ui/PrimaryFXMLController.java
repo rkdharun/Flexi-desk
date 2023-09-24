@@ -2,12 +2,10 @@ package com.github.rkdharun.flexidesk.controller.ui;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.utilities.FXMLoader;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -17,11 +15,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import org.bouncycastle.crypto.io.MacOutputStream;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 
 public class PrimaryFXMLController implements Initializable {
@@ -87,7 +85,10 @@ public class PrimaryFXMLController implements Initializable {
 
       lbl_Info.setText("SCAN TO CONNECT 0R USE : " + MainApp.applicationController.br.getBroadcastReceptionPort());
 
-      new Thread(() -> setChatUI()).start();
+      //update ui on receiving a connection
+      Thread temp1 = new Thread(() -> setChatUI());
+      temp1.setName("ChatUISetting thread");
+      temp1.start();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -96,7 +97,19 @@ public class PrimaryFXMLController implements Initializable {
   }
 
 
+  /**
+   * For changing the BorderPane center to chat UI
+   */
   public void setChatUI(){
+
+
+    Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
+
+    for (Thread thread: threadSet) {
+      System.out.println(thread.getName());
+    }
+
+    System.out.println("running :: "+ threadSet.size());
 
     System.out.println("waiting for the client to join to server");
     try {
@@ -118,6 +131,7 @@ public class PrimaryFXMLController implements Initializable {
       }
     }
 
+
   }
 
   /**
@@ -126,7 +140,10 @@ public class PrimaryFXMLController implements Initializable {
   public void createQr() {
 
     System.out.println("Joining to the network");
+
+    //closes all running connections
     MainApp.applicationController.resetApplication();
+
     //Load client fxml page Loader
     clientPane = fl.getPage("clientPage");
 
@@ -174,7 +191,10 @@ public class PrimaryFXMLController implements Initializable {
   }
 
 
-  //close function for the main Application
+  /**
+   * For closing the main window
+   * @param mouseEvent
+   */
   public void closeApp(MouseEvent mouseEvent) {
     //TODO: handle files closing and stuff
     MainApp.applicationController.stopServer();

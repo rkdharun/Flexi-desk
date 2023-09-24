@@ -9,6 +9,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.io.File;
+
 public class ChatPageController {
 
   @FXML
@@ -27,7 +29,8 @@ public class ChatPageController {
     Stage s = new Stage();
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Select File");
-    fileChooser.showOpenDialog(s);
+    File file = fileChooser.showOpenDialog(s);
+    MainApp.applicationController.sendFile(file);
   }
 
   public  void closeSession(){

@@ -3,6 +3,7 @@ package com.github.rkdharun.flexidesk.network.io;
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
 import com.github.rkdharun.flexidesk.network.service.BroadcastSender;
+import com.github.rkdharun.flexidesk.network.service.ConnectionHandler;
 
 import javax.net.ssl.*;
 import java.io.IOException;
@@ -86,12 +87,12 @@ public class Server {
         System.out.println("Active threads are :" + Thread.activeCount());
         //accept connection from client
         currentSslSocket = (SSLSocket) sslServerSocket.accept();
-
+        MainApp.applicationController.setActiveSocket(currentSslSocket);
         //stop broadcasting to avoid further connections
         bs.stopBroadcasting();
 
         //create a new thread to handle the client connection
-        new Thread(new ClientHandler(currentSslSocket,this)).start();
+        new Thread(new ConnectionHandler(currentSslSocket)).start();
 
 
         System.out.println("Active threads are :" + Thread.activeCount());
@@ -146,35 +147,35 @@ public class Server {
 }
 
 
-class ClientHandler implements Runnable {
-  private SSLSocket sslSocket;
-  private Server server;
-  public ClientHandler(SSLSocket sslSocket, Server server) {
-    this.sslSocket = sslSocket;
-    this.server = server;
-  }
-
-
-  //handles the client connection
-  @Override
-  public void run() {
-    System.out.println(" Client handler Active threads are :" + Thread.activeCount());
-
-    try {
-      System.out.println("reading from client");
-      InputStream is = sslSocket.getInputStream();
-      OutputStream os = sslSocket.getOutputStream();
-      byte[] buff = new byte[1000];
-      while (is.read(buff) != -1) {
-        os.write(buff);
-      }
-
-    } catch (Exception e) {
-      System.out.println("ERROR MESSAGE ON CLIENT HANDLER :: "  +e.getMessage());
-
-
-    }
-    System.out.println("Active threads are :" + Thread.activeCount());
-
-  }
-}
+//class ClientHandler implements Runnable {
+//  private SSLSocket sslSocket;
+//  private Server server;
+//  public ClientHandler(SSLSocket sslSocket, Server server) {
+//    this.sslSocket = sslSocket;
+//    this.server = server;
+//  }
+//
+//
+//  //handles the client connection
+//  @Override
+//  public void run() {
+//    System.out.println(" Client handler Active threads are :" + Thread.activeCount());
+//
+//    try {
+//      System.out.println("reading from client");
+//      InputStream is = sslSocket.getInputStream();
+//      OutputStream os = sslSocket.getOutputStream();
+//      byte[] buff = new byte[1000];
+//      while (is.read(buff) != -1) {
+//        os.write(buff);
+//      }
+//
+//    } catch (Exception e) {
+//      System.out.println("ERROR MESSAGE ON CLIENT HANDLER :: "  +e.getMessage());
+//
+//
+//    }
+//    System.out.println("Active threads are :" + Thread.activeCount());
+//
+//  }
+//}

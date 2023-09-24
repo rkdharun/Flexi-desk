@@ -2,14 +2,17 @@ package com.github.rkdharun.flexidesk.controller.app;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.network.io.Client;
+import com.github.rkdharun.flexidesk.network.io.Sender;
 import com.github.rkdharun.flexidesk.network.io.Server;
 import com.github.rkdharun.flexidesk.network.service.BroadcastReceiver;
 import com.github.rkdharun.flexidesk.utilities.FXMLoader;
 import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
+
 import javafx.application.Platform;
 
+import javax.net.ssl.SSLSocket;
+import java.io.File;
 import java.io.IOException;
-import java.io.PushbackInputStream;
 import java.net.DatagramPacket;
 
 public class ApplicationController {
@@ -21,6 +24,9 @@ public class ApplicationController {
   public Thread serverStartThread;
   public Thread clientJoinThread;
 
+  private SSLSocket activeSocket;
+
+  /*---------------------------------------------------Server Controller Functions------------------------------------*/
 
   /**
    * Creates a new Server Object and closes any previous servers and clients
@@ -29,7 +35,6 @@ public class ApplicationController {
    * @param broadcastPort port number in which the broadcast to be sent ,i.e the destination
    */
   public void createServer(int broadcastPort) {
-
 
     resetApplication();
 
@@ -40,14 +45,28 @@ public class ApplicationController {
     server.initConfiguration();
 
     //start the server
-    serverStartThread = new Thread(()->{
-
-    server.start(broadcastPort);
-    });
+    serverStartThread = new Thread(() -> server.start(broadcastPort));
     serverStartThread.start();
 
   }
 
+
+  /**
+   * @return Current Server object
+   */
+  public Server getServer() {
+    return server;
+  }
+
+
+  /**
+   * Stops the server  if it is not null
+   */
+  public void stopServer() {
+    if (server != null) server.close();
+  }
+
+  /*----------------------------------------------Client Controller  Functions --------------------------------------------------------*/
 
   /**
    * Waits for broadcast and initialize tcp connection whwn received using the broadcast message
@@ -70,7 +89,8 @@ public class ApplicationController {
 
 
     //start receiving broadcast and wait for broadcast message  and initialize tcp connection when received using the broadcast message
-     clientJoinThread = new Thread(() -> {
+    clientJoinThread = new Thread(() -> {
+
       //this line blocks further execution until a broadcast is received
       DatagramPacket ipData = br.receiveBroadcast();
 
@@ -92,27 +112,18 @@ public class ApplicationController {
       }
 
     });
-     clientJoinThread.start();
+    clientJoinThread.setName("Client Join Thread");
+    clientJoinThread.start();
     System.out.println(" Outside the broadcast receive and connect code :: active Threads :: " + Thread.activeCount() + Thread.currentThread().getStackTrace()[1]);
   }
 
-
   /**
-   * @return Current Server object
+   * @return the client object
    */
-  public Server getServer() {
-    return server;
+  public Client getClient() {
+    return client;
   }
 
-  public boolean getHasActiveConnection() {
-    return isActiveConnectionRunning;
-  }
-
-  public void setActiveConnectionRunning(boolean activeConnectionRunning) {
-    isActiveConnectionRunning = activeConnectionRunning;
-  }
-
-  private boolean isActiveConnectionRunning = false;
 
   /**
    * Calls the disconnect method in client object
@@ -121,19 +132,19 @@ public class ApplicationController {
     if (client != null) client.disconnect();
   }
 
-  /**
-   * Stops the server  if it is not null
-   */
-  public void stopServer() {
-    if (server != null) server.close();
-  }
 
+  /**
+   * Resets the Application to stop any running server
+   */
   public void resetApplication() {
     if (br != null) br.close();
     stopClient();
     stopServer();
   }
 
+  /**
+   * revert to the initial UI
+   */
   public void revertMainUI() {
     resetApplication();
     Platform.runLater(() -> {
@@ -146,8 +157,19 @@ public class ApplicationController {
     });
 
   }
+  /*------------------------------------------------------Data Handling controller ---------------------------------------------------------------------------------------------------------*/
 
-  public Client getClient() {
-    return client;
+  public void sendFile(File file){
+    Sender sender = new Sender();
+    sender.sendFile(file,this.getActiveSocket());
+  }
+
+
+  public void setActiveSocket(SSLSocket socket){
+    this.activeSocket= socket;
+  }
+
+  public SSLSocket getActiveSocket() {
+    return activeSocket;
   }
 }

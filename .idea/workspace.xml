@@ -4,18 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="ADDED: UI CHANGE ON CONNECTION">
+    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="ADDED: UI CHANGE ON CONNECTION FOR SERVER">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/packets/ClipboardPacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/packets/ClipboardPacketBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/packets/FilePacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/packets/FilePacketBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/ConnectionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/constants/AppConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/constants/AppConstant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ClientPageFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ClientPageFXMLController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ChatPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/ChatPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/PrimaryFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/ui/PrimaryFXMLController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/BroadcastSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/BroadcastSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/chatPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/chatPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/primary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/primary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/icons/icon_close.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/icons/icon_close.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/icons/icons/img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/BroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/BroadcastReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/SelfSignedCertificateGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/utilities/SelfSignedCertificateGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +36,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaFXApplication" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -74,10 +82,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230918_0001",
+    "com.google.cloudcode.ide_session_index": "20230924_0000",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Source/Flexi-desk/src/main/resources/images/icons",
+    "last_opened_file_path": "D:/Source/Flexi-desk",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -87,7 +95,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "vcs.Git",
+    "settings.editor.selected.configurable": "CodeWithMe",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -240,7 +248,17 @@
       <workItem from="1694937241998" duration="5963000" />
       <workItem from="1694952354656" duration="3715000" />
       <workItem from="1695011864530" duration="1911000" />
-      <workItem from="1695015191801" duration="21668000" />
+      <workItem from="1695015191801" duration="23388000" />
+      <workItem from="1695115065100" duration="6866000" />
+      <workItem from="1695123872452" duration="654000" />
+      <workItem from="1695221699379" duration="910000" />
+      <workItem from="1695307364428" duration="14826000" />
+      <workItem from="1695399158874" duration="1025000" />
+      <workItem from="1695450043571" duration="25000" />
+      <workItem from="1695468884989" duration="443000" />
+      <workItem from="1695473180408" duration="1373000" />
+      <workItem from="1695482712075" duration="3476000" />
+      <workItem from="1695535129319" duration="1406000" />
     </task>
     <task id="LOCAL-00001" summary="Added Controller">
       <created>1693076862050</created>
@@ -339,7 +357,23 @@
       <option name="project" value="LOCAL" />
       <updated>1695042524226</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="ADDED: UI CHANGE ON CONNECTION FOR SERVER">
+      <option name="closed" value="true" />
+      <created>1695047121658</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1695047121658</updated>
+    </task>
+    <task id="LOCAL-00015" summary="ADDED: UI CHANGE ON CONNECTION FOR SERVER">
+      <option name="closed" value="true" />
+      <created>1695047162632</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1695047162632</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,7 +418,8 @@
     <MESSAGE value="UPDATE: Refactoring and thread management" />
     <MESSAGE value="ADDED: Chat UI and controller" />
     <MESSAGE value="ADDED: UI CHANGE ON CONNECTION" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADDED: UI CHANGE ON CONNECTION" />
+    <MESSAGE value="ADDED: UI CHANGE ON CONNECTION FOR SERVER" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED: UI CHANGE ON CONNECTION FOR SERVER" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -395,7 +430,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java</url>
-          <line>30</line>
+          <line>36</line>
           <properties class="com.github.rkdharun.flexidesk.controller.app.ApplicationController" method="createServer">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -404,7 +439,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java</url>
-          <line>42</line>
+          <line>43</line>
           <properties class="com.github.rkdharun.flexidesk.network.io.Server" method="start">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -413,7 +448,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java</url>
-          <line>46</line>
+          <line>47</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>

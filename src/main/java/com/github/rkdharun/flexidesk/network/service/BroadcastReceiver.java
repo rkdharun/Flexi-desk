@@ -17,7 +17,7 @@ public class BroadcastReceiver {
    */
   public BroadcastReceiver() {
     try {
-      socket = new DatagramSocket(0);
+      socket = new DatagramSocket(5555);
 
     } catch (SocketException e) {
       e.printStackTrace();

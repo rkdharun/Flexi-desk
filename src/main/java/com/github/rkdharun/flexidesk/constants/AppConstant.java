@@ -5,4 +5,6 @@ public class AppConstant {
   public static final int ACT_AS_CLIENT = 1002;
 
   public static final String CERTIFICATE_PASSWORD = "password";
+
+  public static final int KEY_LENGTH=1024;
 }
