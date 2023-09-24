@@ -1,5 +1,6 @@
 package com.github.rkdharun.flexidesk.network.io;
 
+import com.github.rkdharun.flexidesk.network.packets.FilePacket;
 import javafx.stage.DirectoryChooser;
 
 import java.io.*;
@@ -22,19 +23,19 @@ public class Receiver {
 
 
       System.out.println("File packet received");
-      File fp;
-      fp = (File) objectInputStream.readObject();
+      FilePacket fp;
+      fp = (FilePacket) objectInputStream.readObject();
       System.out.println("File packet received");
-      System.out.println(fp.getName());
-      System.out.println(fp.length());
+      System.out.println(fp.getFileName());
+      System.out.println(fp.getFileLength());
 
 
       byte[] fileData = new byte[1024 * 1024];
-      File tempFile = new File(selectedDirectory.getAbsolutePath() + "/" + fp.getName().trim());
+      File tempFile = new File(selectedDirectory.getAbsolutePath() + "/" + fp.getFileName().trim());
       tempFile.createNewFile();
       FileOutputStream fos = new FileOutputStream(tempFile);
 
-      Long toRead = fp.length();
+      Long toRead = fp.getFileLength();
       int read = 0;
       byte[] payload = new byte[1024 * 1024];
       while (toRead > 0 && (read = objectInputStream.read(payload)) != -1) {

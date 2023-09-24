@@ -7,9 +7,8 @@ import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
-import java.io.*;
+import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Set;
 import java.util.concurrent.Executors;
 
 import static com.github.rkdharun.flexidesk.MainApp.executorService;

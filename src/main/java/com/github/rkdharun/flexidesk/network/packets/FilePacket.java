@@ -7,12 +7,11 @@ public class FilePacket implements Serializable {
   private String fileName;
   private Long fileLength;
 
-  private FileInputStream fileInputStream;
 
   public FilePacket(FilePacketBuilder filePacketBuilder) {
       fileName = filePacketBuilder.getFileName();
       fileLength = filePacketBuilder.getFileLength();
-      fileInputStream = filePacketBuilder.getFileInputStream();
+
   }
 
   int getFileNameLength() {
@@ -26,10 +25,6 @@ public class FilePacket implements Serializable {
 
   public Long getFileLength() {
     return fileLength;
-  }
-
-  FileInputStream getFileInputStream(){
-    return this.fileInputStream;
   }
 
 

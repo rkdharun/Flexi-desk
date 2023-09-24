@@ -23,16 +23,15 @@ public class Sender {
     ObjectOutputStream oos = null;
     try {
       oos = new ObjectOutputStream(socket.getOutputStream());
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+      System.out.println("Sending file header");
+      oos.write("file".getBytes(), 0, 4);  // write the header to the output stream
+      FilePacket filePacket = new FilePacketBuilder().setFileNames(file.getName()).setFileLength(file.length()).setFileInputStream(fis).buildPacket();
+      System.out.println("Sending file Payload");
 
-    FilePacket filePacket = new FilePacketBuilder().setFileNames(file.getName()).setFileLength(file.length()).setFileInputStream(fis).buildPacket();
-    // write the file name to the output stream
-    try {
-      oos.writeObject(filePacket);
+      // write the file name to the output stream
+      oos.writeObject(file);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
     }
 
     int total = 0;
@@ -50,7 +49,7 @@ public class Sender {
     System.out.println("File Written");
   }
 
-  public static void sendClip(ObjectInputStream objectInputStream){
+  public static void sendClip(ObjectInputStream objectInputStream) {
 
   }
 }
