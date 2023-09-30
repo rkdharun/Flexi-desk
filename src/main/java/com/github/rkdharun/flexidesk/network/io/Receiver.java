@@ -21,8 +21,7 @@ public class Receiver {
 //                    }
 //            );
 
-
-      System.out.println("File packet received");
+      System.out.println("File packet Receiving");
       FilePacket fp;
       fp = (FilePacket) objectInputStream.readObject();
       System.out.println("File packet received");
@@ -43,11 +42,10 @@ public class Receiver {
         toRead -= read;
         System.out.println(toRead / (1024 * 1024) + "MB");
       }
-
-      if (objectInputStream.available() == 0) {
+        System.out.println("File Received");
         fos.close();
+        System.out.println("File Received");
 
-      }
     } catch (FileNotFoundException e) {
         throw new RuntimeException(e);
     } catch (IOException e) {

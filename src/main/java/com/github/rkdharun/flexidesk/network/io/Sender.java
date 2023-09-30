@@ -29,7 +29,7 @@ public class Sender {
       System.out.println("Sending file Payload");
 
       // write the file name to the output stream
-      oos.writeObject(file);
+      oos.writeObject(filePacket);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -38,9 +38,11 @@ public class Sender {
     try {
       System.out.println("Written");
       while ((read = fis.read(payload)) != -1) {
+
         oos.write(payload, 0, read);
+
         total += read;
-        System.out.println(total / (1024 * 1024) + "MB");
+       // System.out.println(total / (1024 * 1024) + "MB");
       }
     } catch (IOException e) {
       throw new RuntimeException(e);

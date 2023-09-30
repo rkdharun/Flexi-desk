@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="ADDED: File Sender">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/packets/FilePacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/packets/FilePacket.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +67,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230924_0002",
+    "com.google.cloudcode.ide_session_index": "20230930_0001",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/Source/Flexi-desk",
@@ -82,7 +80,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "CodeWithMe",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -247,7 +245,11 @@
       <workItem from="1695482712075" duration="3476000" />
       <workItem from="1695535129319" duration="1757000" />
       <workItem from="1695545419444" duration="2748000" />
-      <workItem from="1695548548118" duration="2604000" />
+      <workItem from="1695548548118" duration="6523000" />
+      <workItem from="1695883912003" duration="559000" />
+      <workItem from="1695909146490" duration="402000" />
+      <workItem from="1696061393790" duration="701000" />
+      <workItem from="1696085288069" duration="1289000" />
     </task>
     <task id="LOCAL-00001" summary="Added Controller">
       <created>1693076862050</created>
@@ -370,7 +372,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695545311402</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="ADDED: File Sender">
+      <option name="closed" value="true" />
+      <created>1695552058214</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1695552058214</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
