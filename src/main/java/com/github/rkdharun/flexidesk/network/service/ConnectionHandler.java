@@ -17,7 +17,10 @@ public class ConnectionHandler implements   Runnable{
       this.socket = socket;
     }
 
-    public void handle(){
+  /**
+   * Waits for a header to be arrived and Handle the connection based on the header
+   */
+  public void handle(){
 
       try {
         InputStream inputStream = socket.getInputStream();
@@ -36,7 +39,7 @@ public class ConnectionHandler implements   Runnable{
           }
         }
 
-
+        System.out.println("out of loop");
       } catch (IOException e) {
         throw new RuntimeException(e);
 

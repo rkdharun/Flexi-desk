@@ -24,6 +24,9 @@ public class Receiver {
       System.out.println("File packet Receiving");
       FilePacket fp;
       fp = (FilePacket) objectInputStream.readObject();
+
+
+
       System.out.println("File packet received");
       System.out.println(fp.getFileName());
       System.out.println(fp.getFileLength());
@@ -34,25 +37,27 @@ public class Receiver {
       tempFile.createNewFile();
       FileOutputStream fos = new FileOutputStream(tempFile);
 
-      Long toRead = fp.getFileLength();
+      Long toRead= fp.getFileLength();
       int read = 0;
+      Long totalReceived = 0l;
       byte[] payload = new byte[1024 * 1024];
-      while (toRead > 0 && (read = objectInputStream.read(payload)) != -1) {
+
+      System.out.println("File Receiving");
+      while (totalReceived < toRead && (read = objectInputStream.read(payload)) != -1) {
         fos.write(payload, 0, read);
-        toRead -= read;
-        System.out.println(toRead / (1024 * 1024) + "MB");
+        totalReceived += read;
+        System.out.println(totalReceived +  "--MB---"+toRead);
       }
         System.out.println("File Received");
         fos.close();
         System.out.println("File Received");
 
-    } catch (FileNotFoundException e) {
+    } catch (ClassNotFoundException | IOException e) {
         throw new RuntimeException(e);
-    } catch (IOException e) {
-        throw new RuntimeException(e);
-    } catch (ClassNotFoundException e) {
-        throw new RuntimeException(e);
+
     }
+
+    System.out.println("File Received Exiting function");
   }
 
   public static void receiveClip(ObjectInputStream objectInputStream) {
