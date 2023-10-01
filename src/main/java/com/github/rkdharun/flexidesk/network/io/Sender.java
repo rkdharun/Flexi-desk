@@ -35,7 +35,7 @@ public class Sender {
 
 
     try {
-      objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+     // objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
       System.out.println("Sending file header");
       objectOutputStream.write("file".getBytes(), 0, 4);  // write the header to the output stream
       FilePacket filePacket = new FilePacketBuilder().setFileNames(file.getName()).setFileLength(file.length()).setFileInputStream(fis).buildPacket();
