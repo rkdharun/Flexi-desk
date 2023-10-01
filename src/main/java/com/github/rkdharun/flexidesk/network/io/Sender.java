@@ -7,7 +7,19 @@ import javax.net.ssl.SSLSocket;
 import java.io.*;
 
 public class Sender {
-  //TODO:contrucuted
+
+  private SSLSocket socket;
+  private ObjectOutputStream objectOutputStream;
+
+  public Sender(SSLSocket socket){
+    try {
+      this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+  }
+
   public void sendFile(File file, SSLSocket socket) {
 
     FileInputStream fis = null;
@@ -21,16 +33,16 @@ public class Sender {
 
     int read = 0; // Inital read value of the file
 
-    ObjectOutputStream oos = null;
+
     try {
-      oos = new ObjectOutputStream(socket.getOutputStream());
+      objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
       System.out.println("Sending file header");
-      oos.write("file".getBytes(), 0, 4);  // write the header to the output stream
+      objectOutputStream.write("file".getBytes(), 0, 4);  // write the header to the output stream
       FilePacket filePacket = new FilePacketBuilder().setFileNames(file.getName()).setFileLength(file.length()).setFileInputStream(fis).buildPacket();
       System.out.println("Sending file Payload");
 
       // write the file name to the output stream
-      oos.writeObject(filePacket);
+      objectOutputStream.writeObject(filePacket);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -40,11 +52,13 @@ public class Sender {
       System.out.println("Written");
       while ((read = fis.read(payload)) != -1) {
 
-        oos.write(payload, 0, read);
+        objectOutputStream.write(payload, 0, read);
 
         total += read;
        // System.out.println(total / (1024 * 1024) + "MB");
       }
+      objectOutputStream.flush();
+
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

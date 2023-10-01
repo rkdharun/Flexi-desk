@@ -2,6 +2,7 @@ package com.github.rkdharun.flexidesk.controller.app;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.network.io.Client;
+import com.github.rkdharun.flexidesk.network.io.Receiver;
 import com.github.rkdharun.flexidesk.network.io.Sender;
 import com.github.rkdharun.flexidesk.network.io.Server;
 import com.github.rkdharun.flexidesk.network.service.BroadcastReceiver;
@@ -18,6 +19,8 @@ import java.net.DatagramPacket;
 public class ApplicationController {
   Server server = null;
   Client client = null;
+
+  public static Sender sender = null;
 
   public BroadcastReceiver br = null;
 
@@ -160,7 +163,7 @@ public class ApplicationController {
   /*------------------------------------------------------Data Handling controller ---------------------------------------------------------------------------------------------------------*/
 
   public void sendFile(File file){
-    Sender sender = new Sender();
+
     sender.sendFile(file,this.getActiveSocket());
   }
 
