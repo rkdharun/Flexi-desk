@@ -7,19 +7,8 @@ import javax.net.ssl.SSLSocket;
 import java.io.*;
 
 public class Sender {
-
-
-  private final ObjectOutputStream objectOutputStream;
-
-  public Sender(SSLSocket socket){
-    try {
-      this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  public void sendFile(File file) {
+  //TODO:contrucuted
+  public void sendFile(File file, SSLSocket socket) {
 
     FileInputStream fis = null;
     try {
@@ -31,15 +20,17 @@ public class Sender {
     byte[] payload = new byte[1024 * 1024]; // buffer to read data from the stream
 
     int read = 0; // Inital read value of the file
-    try {
 
+    ObjectOutputStream oos = null;
+    try {
+      oos = new ObjectOutputStream(socket.getOutputStream());
       System.out.println("Sending file header");
-      objectOutputStream.write("file".getBytes(), 0, 4);  // write the header to the output stream
+      oos.write("file".getBytes(), 0, 4);  // write the header to the output stream
       FilePacket filePacket = new FilePacketBuilder().setFileNames(file.getName()).setFileLength(file.length()).setFileInputStream(fis).buildPacket();
       System.out.println("Sending file Payload");
 
       // write the file name to the output stream
-      objectOutputStream.writeObject(filePacket);
+      oos.writeObject(filePacket);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -49,12 +40,11 @@ public class Sender {
       System.out.println("Written");
       while ((read = fis.read(payload)) != -1) {
 
-        objectOutputStream.write(payload, 0, read);
+        oos.write(payload, 0, read);
 
         total += read;
        // System.out.println(total / (1024 * 1024) + "MB");
       }
-      objectOutputStream.flush();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -62,7 +52,7 @@ public class Sender {
     System.out.println("File Written");
   }
 
-  public static void sendClip(ObjectInputStream objectInputStream) {//s
+  public static void sendClip(ObjectInputStream objectInputStream) {
 
   }
 }

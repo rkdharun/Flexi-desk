@@ -13,11 +13,9 @@ import javafx.application.Platform;
 import javax.net.ssl.SSLSocket;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 
 public class ApplicationController {
-  public Sender sender;
   Server server = null;
   Client client = null;
 
@@ -67,10 +65,6 @@ public class ApplicationController {
   public void stopServer() {
     if (server != null) server.close();
   }
-
-
-
-
 
   /*----------------------------------------------Client Controller  Functions --------------------------------------------------------*/
 
@@ -166,8 +160,8 @@ public class ApplicationController {
   /*------------------------------------------------------Data Handling controller ---------------------------------------------------------------------------------------------------------*/
 
   public void sendFile(File file){
-
-    this.sender.sendFile(file);
+    Sender sender = new Sender();
+    sender.sendFile(file,this.getActiveSocket());
   }
 
 
