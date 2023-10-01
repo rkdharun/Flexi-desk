@@ -37,18 +37,22 @@ public class Receiver {
       tempFile.createNewFile();
       FileOutputStream fos = new FileOutputStream(tempFile);
 
-      Long toRead= fp.getFileLength();
+      Long fileLength= fp.getFileLength();
       int read = 0;
       Long totalReceived = 0l;
       byte[] payload = new byte[1024 * 1024];
 
       System.out.println("File Receiving");
-      while (totalReceived < toRead && (read = objectInputStream.read(payload)) != -1) {
+      while (totalReceived < fileLength && (read = objectInputStream.read(payload)) != -1) {
         fos.write(payload, 0, read);
         totalReceived += read;
-        System.out.println(totalReceived +  "--MB---"+toRead);
+        System.out.println(totalReceived +  "--MB---"+fileLength);
+        if(totalReceived==fileLength){
+          System.out.println("same :::::::::::::;");
+        }
       }
         System.out.println("File Received");
+      fos.flush();
         fos.close();
         System.out.println("File Received");
 

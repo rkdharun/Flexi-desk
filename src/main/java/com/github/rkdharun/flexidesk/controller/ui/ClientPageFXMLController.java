@@ -33,9 +33,8 @@ public class ClientPageFXMLController {
       int port = Integer.parseInt(txtPortNumber.getText().trim());
       MainApp.applicationController.createServer(port); //server creation does not interfere with the UI
       showProgress();
-      new Thread(() -> {
-        setChatUIOnConnection();
-      }).start();
+      System.out.println("starting updation Thread");
+      new Thread(() -> setChatUIOnConnection()).start();
     }
   }
 
@@ -61,6 +60,7 @@ public class ClientPageFXMLController {
     FXMLLoader f = FXMLoader.getPage("chatPage");
     try {
       AnchorPane ap =  f.load();
+      System.out.println("loading chat");
       anchorPane.getChildren().addAll(ap.getChildren());
     } catch (IOException e) {
       throw new RuntimeException(e);
