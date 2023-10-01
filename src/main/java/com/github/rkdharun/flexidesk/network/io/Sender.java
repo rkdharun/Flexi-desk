@@ -1,5 +1,6 @@
 package com.github.rkdharun.flexidesk.network.io;
 
+import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.network.packets.FilePacket;
 import com.github.rkdharun.flexidesk.network.packets.FilePacketBuilder;
 
@@ -9,9 +10,9 @@ import java.io.*;
 public class Sender {
 
   private SSLSocket socket;
-  private ObjectOutputStream objectOutputStream;
+  public ObjectOutputStream objectOutputStream;
 
-  public Sender(SSLSocket socket){
+  public Sender(SSLSocket socket) {
     try {
       this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
     } catch (IOException e) {
@@ -35,7 +36,7 @@ public class Sender {
 
 
     try {
-     // objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+      // objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
       System.out.println("Sending file header");
       objectOutputStream.write("file".getBytes(), 0, 4);  // write the header to the output stream
       FilePacket filePacket = new FilePacketBuilder().setFileNames(file.getName()).setFileLength(file.length()).setFileInputStream(fis).buildPacket();
@@ -47,6 +48,18 @@ public class Sender {
       e.printStackTrace();
     }
 
+    //wait for confirmation of acceptance
+    byte[] buff = new byte[3];
+    try {
+      MainApp.applicationController.receiver.objectInputStream.read(buff, 0, 3);
+      if (new String(buff).trim().equalsIgnoreCase("rej")) {
+        return;
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+
     int total = 0;
     try {
       System.out.println("Written");
@@ -55,7 +68,7 @@ public class Sender {
         objectOutputStream.write(payload, 0, read);
 
         total += read;
-       // System.out.println(total / (1024 * 1024) + "MB");
+        // System.out.println(total / (1024 * 1024) + "MB");
       }
       objectOutputStream.flush();
 

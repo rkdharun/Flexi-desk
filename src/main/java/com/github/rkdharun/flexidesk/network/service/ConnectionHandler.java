@@ -5,16 +5,13 @@ import com.github.rkdharun.flexidesk.network.io.Receiver;
 import javafx.stage.DirectoryChooser;
 
 import javax.net.ssl.SSLSocket;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
+import java.io.*;
 
 public class ConnectionHandler implements   Runnable{
-    SSLSocket socket;
-    public ConnectionHandler(SSLSocket socket){
-      this.socket = socket;
+
+    private ObjectInputStream objectInputStream;
+    public ConnectionHandler(ObjectInputStream objectInputStream){
+      this.objectInputStream = objectInputStream;
     }
 
   /**
@@ -23,8 +20,6 @@ public class ConnectionHandler implements   Runnable{
   public void handle(){
 
       try {
-        InputStream inputStream = socket.getInputStream();
-        ObjectInputStream objectInputStream =  new ObjectInputStream(inputStream);
         byte[] header = new byte[4];
 
         while (objectInputStream.read(header,0,4) != -1){

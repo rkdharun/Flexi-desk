@@ -8,6 +8,7 @@ import com.github.rkdharun.flexidesk.network.service.ConnectionHandler;
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.OutputStream;
 
 
@@ -88,12 +89,15 @@ public class Server {
         //accept connection from client
         currentSslSocket = (SSLSocket) sslServerSocket.accept();
         MainApp.applicationController.setActiveSocket(currentSslSocket);
+
+        //create a sender for this socket
         MainApp.applicationController.sender = new Sender(currentSslSocket);
+        MainApp.applicationController.receiver = new Receiver(currentSslSocket);
         //stop broadcasting to avoid further connections
         bs.stopBroadcasting();
 
         //create a new thread to handle the client connection
-        new Thread(new ConnectionHandler(currentSslSocket)).start();
+        new Thread(new ConnectionHandler(new ObjectInputStream(currentSslSocket.getInputStream()))).start();
 
 
         System.out.println("Active threads are :" + Thread.activeCount());

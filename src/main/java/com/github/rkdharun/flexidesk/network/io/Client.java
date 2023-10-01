@@ -4,10 +4,12 @@ import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
 import com.github.rkdharun.flexidesk.network.service.ConnectionHandler;
 import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
+import com.google.zxing.ReaderException;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.util.concurrent.Executors;
 
@@ -51,6 +53,8 @@ public class Client {
       //set the Current active socket in the application handler
       MainApp.applicationController.setActiveSocket(sslSocket);
 
+      MainApp.applicationController.sender = new Sender(sslSocket);
+      MainApp.applicationController.receiver = new Receiver(sslSocket);
       //set client authentication to true so that the server can verify the client with ssl certificate
       sslSocket.setNeedClientAuth(true);
       System.out.println("Passing to Connection handler :: active Threads :: "+Thread.activeCount());
@@ -58,7 +62,7 @@ public class Client {
         if(executorService.isShutdown())
           executorService.shutdownNow();
       executorService = Executors.newFixedThreadPool(1);
-      executorService.submit(new ConnectionHandler(sslSocket));
+      executorService.submit(new ConnectionHandler(new ObjectInputStream(sslSocket.getInputStream())));
 
 
       //new Thread to handle the connection

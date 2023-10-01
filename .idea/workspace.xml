@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="Update : UI change on connection">
+    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="Update: Support for multiple file transmissiom">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/gui/ConfirmationDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/ConnectionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -399,7 +403,23 @@
       <option name="project" value="LOCAL" />
       <updated>1696181388246</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="added feature">
+      <option name="closed" value="true" />
+      <created>1696182970692</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1696182970692</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Update: Support for multiple file transmissiom">
+      <option name="closed" value="true" />
+      <created>1696183459088</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1696183459088</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -448,7 +468,9 @@
     <MESSAGE value="ADDED: File Sender" />
     <MESSAGE value="Nothing much" />
     <MESSAGE value="Update : UI change on connection" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update : UI change on connection" />
+    <MESSAGE value="added feature" />
+    <MESSAGE value="Update: Support for multiple file transmissiom" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update: Support for multiple file transmissiom" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -457,6 +479,11 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="14" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
