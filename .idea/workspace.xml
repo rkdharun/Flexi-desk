@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="Update : UI change on connection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Client.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +33,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="MIXED" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://C:/Program Files/Java/jdk-17/lib/src.zip!/java.base/java/lang/NumberFormatException.java" root0="SKIP_INSPECTION" />

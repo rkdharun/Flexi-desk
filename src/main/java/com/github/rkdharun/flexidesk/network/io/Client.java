@@ -50,7 +50,7 @@ public class Client {
 
       //set the Current active socket in the application handler
       MainApp.applicationController.setActiveSocket(sslSocket);
-
+      MainApp.applicationController.sender = new Sender(sslSocket);
       //set client authentication to true so that the server can verify the client with ssl certificate
       sslSocket.setNeedClientAuth(true);
       System.out.println("Passing to Connection handler :: active Threads :: "+Thread.activeCount());
