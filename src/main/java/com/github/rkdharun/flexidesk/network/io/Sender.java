@@ -51,7 +51,7 @@ public class Sender {
     System.out.println("File Written");
   }
 
-  public static void sendClip(ObjectInputStream objectInputStream) {
+  public static void sendClip(ObjectInputStream objectInputStream) {//s
 
   }
 }
