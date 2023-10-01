@@ -20,7 +20,6 @@ public class ApplicationController {
   Server server = null;
   Client client = null;
 
-  public static Receiver receiver;
   public static Sender sender;
 
   public BroadcastReceiver br = null;
