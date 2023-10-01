@@ -6,9 +6,7 @@ import com.github.rkdharun.flexidesk.network.service.BroadcastSender;
 import com.github.rkdharun.flexidesk.network.service.ConnectionHandler;
 
 import javax.net.ssl.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 
 public class Server {
@@ -88,6 +86,7 @@ public class Server {
         //accept connection from client
         currentSslSocket = (SSLSocket) sslServerSocket.accept();
         MainApp.applicationController.setActiveSocket(currentSslSocket);
+        MainApp.applicationController.sender = new Sender(currentSslSocket);
         //stop broadcasting to avoid further connections
         bs.stopBroadcasting();
 

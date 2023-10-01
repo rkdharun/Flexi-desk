@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment="Nothing much">
+    <list default="true" id="63b75f79-167a-42e8-ad0f-ee6bb2743a40" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/ConnectionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +70,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230930_0002",
+    "com.google.cloudcode.ide_session_index": "20231001_0000",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/Source/Flexi-desk",
@@ -250,7 +253,8 @@
       <workItem from="1695909146490" duration="402000" />
       <workItem from="1696061393790" duration="701000" />
       <workItem from="1696085288069" duration="1409000" />
-      <workItem from="1696095721786" duration="3251000" />
+      <workItem from="1696095721786" duration="4354000" />
+      <workItem from="1696165026432" duration="4783000" />
     </task>
     <task id="LOCAL-00001" summary="Added Controller">
       <created>1693076862050</created>
@@ -389,7 +393,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696095607321</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary=".">
+      <option name="closed" value="true" />
+      <created>1696099448792</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1696099448792</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,7 +449,8 @@
     <MESSAGE value="ADDED: UI CHANGE ON CONNECTION FOR SERVER" />
     <MESSAGE value="ADDED: File Sender" />
     <MESSAGE value="Nothing much" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nothing much" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -448,7 +461,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/controller/app/ApplicationController.java</url>
-          <line>36</line>
+          <line>38</line>
           <properties class="com.github.rkdharun.flexidesk.controller.app.ApplicationController" method="createServer">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -457,7 +470,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java</url>
-          <line>43</line>
+          <line>41</line>
           <properties class="com.github.rkdharun.flexidesk.network.io.Server" method="start">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -466,8 +479,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java</url>
-          <line>9</line>
-          <properties class="com.github.rkdharun.flexidesk.network.io.Sender" method="sendFile">
+          <line>19</line>
+          <properties class="com.github.rkdharun.flexidesk.network.io.Sender">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
@@ -475,23 +488,53 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Server.java</url>
-          <line>47</line>
+          <line>45</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java</url>
-          <line>24</line>
+          <line>34</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Sender.java</url>
-          <line>26</line>
+          <line>36</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/ConnectionHandler.java</url>
-          <line>34</line>
+          <line>36</line>
           <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/ConnectionHandler.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/ConnectionHandler.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/service/ConnectionHandler.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/rkdharun/flexidesk/network/io/Receiver.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
