@@ -86,7 +86,7 @@ public class Server {
         //accept connection from client
         currentSslSocket = (SSLSocket) sslServerSocket.accept();
         MainApp.applicationController.setActiveSocket(currentSslSocket);
-        MainApp.applicationController.sender = new Sender(currentSslSocket);
+        System.out.println("connection Accepted");
         //stop broadcasting to avoid further connections
         bs.stopBroadcasting();
 
