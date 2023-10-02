@@ -66,4 +66,8 @@ public class Receiver {
 
   public static void receiveClip(ObjectInputStream objectInputStream) {
   }
+
+  public static String receiveHeader(int headerLen){
+    byte[] buff = new byte[headerLen];
+  }
 }

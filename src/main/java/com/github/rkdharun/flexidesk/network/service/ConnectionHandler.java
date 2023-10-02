@@ -25,7 +25,7 @@ public class ConnectionHandler implements   Runnable{
       try {
 //        InputStream inputStream = socket.getInputStream();
 //        ObjectInputStream objectInputStream =  new ObjectInputStream(inputStream);
-                ObjectInputStream objectInputStream =  MainApp.applicationController.receiver.objectInputStream;
+        ObjectInputStream objectInputStream =  MainApp.applicationController.receiver.objectInputStream;
 
         byte[] header = new byte[4];
 

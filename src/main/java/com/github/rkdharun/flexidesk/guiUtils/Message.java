@@ -1,4 +1,4 @@
-package com.github.rkdharun.flexidesk.gui;
+package com.github.rkdharun.flexidesk.guiUtils;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

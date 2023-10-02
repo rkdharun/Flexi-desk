@@ -2,6 +2,7 @@ package com.github.rkdharun.flexidesk.network.io;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
+import com.github.rkdharun.flexidesk.controller.app.MainUIUpdater;
 import com.github.rkdharun.flexidesk.network.service.ConnectionHandler;
 import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
 
@@ -10,6 +11,8 @@ import javax.net.ssl.SSLSocketFactory;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.concurrent.Executors;
 
 import static com.github.rkdharun.flexidesk.MainApp.executorService;
@@ -47,8 +50,10 @@ public class Client {
 
     try {
       //create a ssl socket with the specified ip and port
-      sslSocket = (SSLSocket) sslSocketFactory.createSocket(ip, port);
-
+      sslSocket = (SSLSocket) sslSocketFactory.createSocket();
+      sslSocket.addHandshakeCompletedListener(handshakeCompletedEvent -> MainUIUpdater.setChatUIOnConnection());
+      SocketAddress sockaddr = new InetSocketAddress(ip, port);
+      sslSocket.connect(sockaddr,0);
       //set the Current active socket in the application handler
       MainApp.applicationController.setActiveSocket(sslSocket);
       MainApp.applicationController.sender = new Sender(sslSocket);

@@ -2,14 +2,13 @@ package com.github.rkdharun.flexidesk.network.io;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
+import com.github.rkdharun.flexidesk.controller.app.MainUIUpdater;
 import com.github.rkdharun.flexidesk.network.service.BroadcastSender;
 import com.github.rkdharun.flexidesk.network.service.ConnectionHandler;
 
 import javax.net.ssl.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.OutputStream;
 
 
 public class Server {
@@ -48,8 +47,12 @@ public class Server {
         //create a new broadcast sender
         bs = new BroadcastSender();
 
+
+        SSLServerSocketFactory sslServerSocketFactory = sslConfiguration.getSslServerSocketFactory();
+
         //create a server socket
-        sslServerSocket = (SSLServerSocket) sslConfiguration.getSslServerSocketFactory().createServerSocket(0);
+        sslServerSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(0);
+
 
         this.setPort(sslServerSocket.getLocalPort());
         System.out.println("Server Started at port " + getPort());
@@ -88,6 +91,9 @@ public class Server {
         System.out.println("Active threads are :" + Thread.activeCount());
         //accept connection from client
         currentSslSocket = (SSLSocket) sslServerSocket.accept();
+        currentSslSocket.addHandshakeCompletedListener(handshakeCompletedEvent -> MainUIUpdater.setChatUIOnConnection());
+
+
         MainApp.applicationController.setActiveSocket(currentSslSocket);
         MainApp.applicationController.sender = new Sender(currentSslSocket);
         MainApp.applicationController.receiver = new Receiver(new ObjectInputStream(currentSslSocket.getInputStream()));
