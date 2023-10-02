@@ -22,6 +22,7 @@ public class ApplicationController {
 
   public static Sender sender;
 
+  public static Receiver receiver;
   public BroadcastReceiver br = null;
 
   public Thread serverStartThread;

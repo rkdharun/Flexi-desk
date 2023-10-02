@@ -6,6 +6,10 @@ import javafx.stage.DirectoryChooser;
 import java.io.*;
 
 public class Receiver {
+  public ObjectInputStream objectInputStream;
+  public Receiver(ObjectInputStream objectInputStream){
+    this.objectInputStream =  objectInputStream;
+  }
 
   public static void receiveFile(ObjectInputStream objectInputStream){
     try {

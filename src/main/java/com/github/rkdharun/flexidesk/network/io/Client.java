@@ -8,6 +8,7 @@ import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.util.concurrent.Executors;
 
@@ -51,6 +52,8 @@ public class Client {
       //set the Current active socket in the application handler
       MainApp.applicationController.setActiveSocket(sslSocket);
       MainApp.applicationController.sender = new Sender(sslSocket);
+      MainApp.applicationController.receiver = new Receiver(new ObjectInputStream(sslSocket.getInputStream()));
+
       //set client authentication to true so that the server can verify the client with ssl certificate
       sslSocket.setNeedClientAuth(true);
       System.out.println("Passing to Connection handler :: active Threads :: "+Thread.activeCount());

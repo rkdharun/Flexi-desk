@@ -1,6 +1,7 @@
 package com.github.rkdharun.flexidesk.controller.ui;
 
 import com.github.rkdharun.flexidesk.MainApp;
+import com.github.rkdharun.flexidesk.controller.app.MainUIController;
 import com.github.rkdharun.flexidesk.gui.Message;
 import com.github.rkdharun.flexidesk.utilities.FXMLoader;
 import javafx.application.Platform;
@@ -31,7 +32,9 @@ public class ClientPageFXMLController {
       Message.show("Please enter a valid port number", "warning");
     } else {
       int port = Integer.parseInt(txtPortNumber.getText().trim());
-      MainApp.applicationController.createServer(port); //server creation does not interfere with the UI
+     // MainUIController.anchorPane = anchorPane;
+      MainApp.applicationController.createServer(port);//server creation does not interfere with the UI
+
       showProgress();
       new Thread(() -> {
         setChatUIOnConnection();

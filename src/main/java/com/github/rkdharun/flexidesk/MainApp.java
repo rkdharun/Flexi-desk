@@ -20,7 +20,7 @@ public class MainApp extends Application {
   public static BorderPane mainUI;
   public static double initialY;
   public static double initialX;
-  public static int currentThreadCounts = 0;
+
   public static ApplicationController applicationController;
   public static ExecutorService executorService;
 

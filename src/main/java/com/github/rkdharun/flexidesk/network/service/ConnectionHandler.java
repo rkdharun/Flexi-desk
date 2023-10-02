@@ -23,8 +23,10 @@ public class ConnectionHandler implements   Runnable{
   public void handle(){
 
       try {
-        InputStream inputStream = socket.getInputStream();
-        ObjectInputStream objectInputStream =  new ObjectInputStream(inputStream);
+//        InputStream inputStream = socket.getInputStream();
+//        ObjectInputStream objectInputStream =  new ObjectInputStream(inputStream);
+                ObjectInputStream objectInputStream =  MainApp.applicationController.receiver.objectInputStream;
+
         byte[] header = new byte[4];
 
         while (objectInputStream.read(header,0,4) != -1){
