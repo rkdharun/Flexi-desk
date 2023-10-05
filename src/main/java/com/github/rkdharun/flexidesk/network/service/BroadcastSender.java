@@ -49,7 +49,7 @@ public class BroadcastSender {
             socket.send(packet);
           }
         } catch (IOException e) {
-          e.printStackTrace();
+
           System.out.println("Error Message :: "+ e.getMessage());
           break;
         }

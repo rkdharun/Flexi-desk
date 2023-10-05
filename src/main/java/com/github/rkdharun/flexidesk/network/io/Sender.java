@@ -1,7 +1,18 @@
 package com.github.rkdharun.flexidesk.network.io;
 
+import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.network.packets.FilePacket;
 import com.github.rkdharun.flexidesk.network.packets.FilePacketBuilder;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import javax.net.ssl.SSLSocket;
 import java.io.*;
@@ -11,7 +22,7 @@ public class Sender {
   private SSLSocket socket;
   private ObjectOutputStream objectOutputStream;
 
-  public Sender(SSLSocket socket){
+  public Sender(SSLSocket socket) {
     try {
       this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
     } catch (IOException e) {
@@ -32,13 +43,13 @@ public class Sender {
     byte[] payload = new byte[1024 * 1024]; // buffer to read data from the stream
 
     int read = 0; // Inital read value of the file
-
+    FilePacket filePacket = null;
 
     try {
-     // objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+      // objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
       System.out.println("Sending file header");
       objectOutputStream.write("file".getBytes(), 0, 4);  // write the header to the output stream
-      FilePacket filePacket = new FilePacketBuilder().setFileNames(file.getName()).setFileLength(file.length()).setFileInputStream(fis).buildPacket();
+      filePacket = new FilePacketBuilder().setFileNames(file.getName()).setFileLength(file.length()).setFileInputStream(fis).buildPacket();
       System.out.println("Sending file Payload");
 
       // write the file name to the output stream
@@ -47,15 +58,42 @@ public class Sender {
       e.printStackTrace();
     }
 
+    ProgressBar progressBar = new ProgressBar();
+
+    progressBar.setProgress(0);
+    System.out.println("File Receiving");
+    assert filePacket != null;
+    String fileName = filePacket.getFileName();
+    Platform.runLater(() -> {
+      HBox chat = new HBox();
+      chat.setAlignment(Pos.BOTTOM_LEFT);
+      Label l =  new Label(fileName);
+      l.setPadding( new Insets(20.0,20.0,20.0,20.0));
+      chat.getChildren().add(l);
+      MainApp.applicationController.chatView.getChildren().add(chat);
+      Stage s = new Stage();
+      s.initModality(Modality.APPLICATION_MODAL);
+      s.setTitle("Receiving File");
+      s.setMinWidth(250);
+      HBox hbox = new HBox();
+      hbox.getChildren().add(progressBar);
+      Scene sc = new Scene(hbox, 200, 200);
+      // set the scene
+      s.setScene(sc);
+      s.showAndWait();
+
+    });
     int total = 0;
     try {
       System.out.println("Written");
+      Long fSize = filePacket.getFileLength();
       while ((read = fis.read(payload)) != -1) {
 
         objectOutputStream.write(payload, 0, read);
 
         total += read;
-       // System.out.println(total / (1024 * 1024) + "MB");
+        progressBar.setProgress((double) total / fSize);
+        // System.out.println(total / (1024 * 1024) + "MB");
       }
       objectOutputStream.flush();
 

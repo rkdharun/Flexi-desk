@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -22,6 +23,8 @@ public class ChatPageController {
   @FXML
   private Button btnReceive;
 
+  @FXML
+  private VBox chatView;
 
   @FXML
   private ImageView icon_close;
@@ -39,6 +42,7 @@ public class ChatPageController {
   }
   @FXML
   private void initialize() {
+    MainApp.applicationController.chatView = chatView;
     //TODO
   }
 

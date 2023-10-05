@@ -1,13 +1,28 @@
 package com.github.rkdharun.flexidesk.network.io;
 
+import com.github.rkdharun.flexidesk.MainApp;
+import com.github.rkdharun.flexidesk.guiUtils.ProgressIndicatorBox;
 import com.github.rkdharun.flexidesk.network.packets.FilePacket;
 import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.TilePane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.event.EventHandler;
+
+import javax.swing.*;
 
 import java.io.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Receiver {
   public ObjectInputStream objectInputStream;
@@ -53,19 +68,38 @@ public class Receiver {
       int read = 0;
       Long totalReceived = 0l;
       byte[] payload = new byte[1024 * 1024];
+      ProgressBar progressBar = new ProgressBar();
 
+      progressBar.setProgress(0);
       System.out.println("File Receiving");
+      Long finalTotalReceived = totalReceived;
+      Platform.runLater(()->{
+        MainApp.applicationController.chatView.getChildren().add(new Label(fp.getFileName()));
+        Stage s = new Stage();
+        s.initModality(Modality.APPLICATION_MODAL);
+        s.setTitle("Receiving File");
+        s.setMinWidth(250);
+        HBox hbox = new HBox();
+        hbox.getChildren().add(progressBar);
+        Scene sc = new Scene(hbox, 200, 200);
+        // set the scene
+        s.setScene(sc);
+        s.showAndWait();
+
+      });
       while (totalReceived < toRead && (read = objectInputStream.read(payload)) != -1) {
         fos.write(payload, 0, read);
         totalReceived += read;
-        System.out.println(totalReceived + "--MB---" + toRead);
+
+        progressBar.setProgress( (double) totalReceived /toRead);
+        //System.out.println(totalReceived + "--MB---" + toRead);
       }
       System.out.println("File Received");
       fos.close();
       System.out.println("File Received");
 
     } catch (ClassNotFoundException | IOException e) {
-      throw new RuntimeException(e);
+      System.out.println(e.getMessage());
 
     }
 

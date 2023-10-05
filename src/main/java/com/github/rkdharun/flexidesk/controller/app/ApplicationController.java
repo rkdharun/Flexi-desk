@@ -10,6 +10,7 @@ import com.github.rkdharun.flexidesk.utilities.FXMLoader;
 import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
 
 import javafx.application.Platform;
+import javafx.scene.layout.VBox;
 
 import javax.net.ssl.SSLSocket;
 import java.io.File;
@@ -29,6 +30,8 @@ public class ApplicationController {
   public Thread clientJoinThread;
 
   private SSLSocket activeSocket;
+
+  public  VBox  chatView;
 
   /*---------------------------------------------------Server Controller Functions------------------------------------*/
 

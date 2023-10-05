@@ -23,7 +23,7 @@
       </Button>
       <Pane layoutX="54.0" layoutY="32.0" prefHeight="336.0" prefWidth="481.0" style="-fx-background-radius: 15px 15px 15px 15px; -fx-background-color: #222222;">
          <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="336.0" prefWidth="482.0">
+            <VBox fx:id="chatView" alignment="TOP_RIGHT" prefHeight="336.0" prefWidth="482.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="28.0" prefWidth="482.0">
                      <children>

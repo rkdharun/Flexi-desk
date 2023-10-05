@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class Progressbar {
+public class ProgressIndicatorBox {
   private static Stage stage;
   public  static  void show(String message,String title){
     //create a new stage
