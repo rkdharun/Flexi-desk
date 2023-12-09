@@ -4,6 +4,7 @@ import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.network.packets.FilePacket;
 import com.github.rkdharun.flexidesk.network.packets.FilePacketBuilder;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -59,6 +60,9 @@ public class Sender {
     ProgressBar progressBar = new ProgressBar();
 
     progressBar.setProgress(0);
+
+    SimpleFloatProperty progress = new SimpleFloatProperty(0);
+    progress.bind(progressBar.progressProperty());
     System.out.println("File Receiving");
     var lambdaContext = new Object() {
       int total = 0;
@@ -74,14 +78,7 @@ public class Sender {
       l.setWrapText(true);
       l.setTextFill(Paint.valueOf("white"));
       l.setPadding( new Insets(20.0,20.0,20.0,20.0));
-      chat.getChildren().add(l);
-      Label progress = new Label();
-      progress.setTextFill(Paint.valueOf("white"));
-      progress.setText(lambdaContext.total + "/"+ tsize);
-      progress.setPadding( new Insets(20.0,20.0,20.0,20.0));
-      chat.getChildren().add(progress);
-
-
+      chat.getChildren().addAll(l,progressBar);
       MainApp.applicationController.chatView.getChildren().add(chat);
 
 
@@ -94,8 +91,9 @@ public class Sender {
 
         objectOutputStream.write(payload, 0, read);
         lambdaContext.total += read;
+        progress.add((float) (read / (float) fSize));
 
-        // System.out.println(total / (1024 * 1024) + "MB");
+        System.out.println(lambdaContext.total/ (1024 * 1024) + "MB");
       }
       objectOutputStream.flush();
 

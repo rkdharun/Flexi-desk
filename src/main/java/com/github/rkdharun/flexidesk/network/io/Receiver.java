@@ -5,6 +5,7 @@ import com.github.rkdharun.flexidesk.guiUtils.ProgressIndicatorBox;
 import com.github.rkdharun.flexidesk.network.packets.FilePacket;
 import javafx.application.Platform;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -75,9 +76,14 @@ public class Receiver {
         Long totalReceived = 0L;
       };
       byte[] payload = new byte[1024 * 1024];
-      ProgressBar progressBar = new ProgressBar();
 
+      ProgressBar progressBar = new ProgressBar();
       progressBar.setProgress(0);
+
+      SimpleFloatProperty step = new SimpleFloatProperty(0);
+      step.addListener((observable, oldValue, newValue) -> {
+        progressBar.setProgress(newValue.floatValue());
+      });
       System.out.println("File Receiving");
       Long finalTotalReceived = ref.totalReceived;
       Platform.runLater(()->{
@@ -86,21 +92,16 @@ public class Receiver {
         Label msg = new Label(fp.getFileName());
         msg.setWrapText(true);
         msg.setTextFill(Paint.valueOf("white"));
-        Label progress = new Label();
-        progress.setTextFill(Paint.valueOf("white"));
-        progress.setText(ref.totalReceived + "/"+ toRead);
-        progress.setPadding( new Insets(20.0,20.0,20.0,20.0));
-        chat.getChildren().add(msg);
-        chat.getChildren().add(progress);
-
-        MainApp.applicationController.chatView.getChildren().add(msg);
+        progressBar.setVisible(true);
+        chat.getChildren().addAll(msg,progressBar);
+        MainApp.applicationController.chatView.getChildren().add(chat);
 
 
       });
       while (ref.totalReceived < toRead && (read = objectInputStream.read(payload)) != -1) {
         fos.write(payload, 0, read);
         ref.totalReceived += read;
-
+        step.set((float) (ref.totalReceived / (float) toRead));
       }
       System.out.println("File Received");
       fos.close();
