@@ -6,13 +6,11 @@ import com.github.rkdharun.flexidesk.network.packets.FilePacketBuilder;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import javax.net.ssl.SSLSocket;
 import java.io.*;
@@ -62,37 +60,40 @@ public class Sender {
 
     progressBar.setProgress(0);
     System.out.println("File Receiving");
-    assert filePacket != null;
+    var lambdaContext = new Object() {
+      int total = 0;
+    };
+
     String fileName = filePacket.getFileName();
+    float tsize = filePacket.getFileLength();
     Platform.runLater(() -> {
-      HBox chat = new HBox();
+      VBox chat = new VBox();
+      HBox filename = new HBox();
       chat.setAlignment(Pos.BOTTOM_LEFT);
       Label l =  new Label(fileName);
+      l.setWrapText(true);
+      l.setTextFill(Paint.valueOf("white"));
       l.setPadding( new Insets(20.0,20.0,20.0,20.0));
       chat.getChildren().add(l);
+      Label progress = new Label();
+      progress.setTextFill(Paint.valueOf("white"));
+      progress.setText(lambdaContext.total + "/"+ tsize);
+      chat.getChildren().add(progress);
+
+
       MainApp.applicationController.chatView.getChildren().add(chat);
-      Stage s = new Stage();
-      s.initModality(Modality.APPLICATION_MODAL);
-      s.setTitle("Receiving File");
-      s.setMinWidth(250);
-      HBox hbox = new HBox();
-      hbox.getChildren().add(progressBar);
-      Scene sc = new Scene(hbox, 200, 200);
-      // set the scene
-      s.setScene(sc);
-      s.showAndWait();
+
 
     });
-    int total = 0;
+
     try {
       System.out.println("Written");
       Long fSize = filePacket.getFileLength();
       while ((read = fis.read(payload)) != -1) {
 
         objectOutputStream.write(payload, 0, read);
+        lambdaContext.total += read;
 
-        total += read;
-        progressBar.setProgress((double) total / fSize);
         // System.out.println(total / (1024 * 1024) + "MB");
       }
       objectOutputStream.flush();

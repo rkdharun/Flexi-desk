@@ -16,6 +16,8 @@ import javax.net.ssl.SSLSocket;
 import java.io.File;
 import java.io.IOException;
 import java.net.DatagramPacket;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ApplicationController {
   Server server = null;
@@ -27,9 +29,11 @@ public class ApplicationController {
   public Thread clientJoinThread;
 
   private SSLSocket activeSocket;
-  public  VBox  chatView;
+  public VBox chatView;
 
   public FXMLoader fl;
+
+  Queue<File> fileQueue = new LinkedList<File>();
 
   /*---------------------------------------------------Server Controller Functions------------------------------------*/
 
@@ -129,11 +133,11 @@ public class ApplicationController {
     return client;
   }
 
-/**
- * @return state - if true - client is connected else flase
- */
-  public boolean isClientConnected(){
-    if(getClient() != null)
+  /**
+   * @return state - if true - client is connected else flase
+   */
+  public boolean isClientConnected() {
+    if (getClient() != null)
       return this.getClient().getSslSocket().isConnected();
     else
       return false;
@@ -163,25 +167,26 @@ public class ApplicationController {
   public void revertMainUI() {
     resetApplication();
     Platform.runLater(() -> {
-      System.out.println("Inside platform run later that updates the infoCenter");
       try {
         MainApp.mainUI.setCenter(FXMLoader.getPage("infoCenter").load());
       } catch (IOException e) {
-        throw new RuntimeException(e);
+        System.out.println(e.getMessage());
       }
     });
 
   }
   /*------------------------------------------------------Data Handling controller ---------------------------------------------------------------------------------------------------------*/
 
-  public void sendFile(File file){
+  public void sendFile(File file) {
 
-    sender.sendFile(file,this.getActiveSocket());
+      sender.sendFile(file, this.getActiveSocket());
+
+
   }
 
 
-  public void setActiveSocket(SSLSocket socket){
-    this.activeSocket= socket;
+  public void setActiveSocket(SSLSocket socket) {
+    this.activeSocket = socket;
   }
 
   public SSLSocket getActiveSocket() {

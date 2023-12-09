@@ -31,7 +31,7 @@ public class ChatPageController {
   public  void sendFile() {
     Stage s = new Stage();
     FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Select File");
+    fileChooser.setTitle("Select File To Send");
     File file = fileChooser.showOpenDialog(s);
     MainApp.applicationController.sendFile(file);
   }
