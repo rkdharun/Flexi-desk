@@ -66,7 +66,7 @@ public class Receiver {
 
       Long toRead = fp.getFileLength();
       int read = 0;
-      Long totalReceived = 0l;
+      Long totalReceived = 0L;
       byte[] payload = new byte[1024 * 1024];
       ProgressBar progressBar = new ProgressBar();
 

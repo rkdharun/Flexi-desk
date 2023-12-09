@@ -2,6 +2,7 @@ package com.github.rkdharun.flexidesk.network.io;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
+import com.github.rkdharun.flexidesk.controller.app.ApplicationController;
 import com.github.rkdharun.flexidesk.controller.app.MainUIUpdater;
 import com.github.rkdharun.flexidesk.network.service.ConnectionHandler;
 import com.github.rkdharun.flexidesk.utilities.ServerNotFoundException;
@@ -56,8 +57,8 @@ public class Client {
       sslSocket.connect(sockaddr,0);
       //set the Current active socket in the application handler
       MainApp.applicationController.setActiveSocket(sslSocket);
-      MainApp.applicationController.sender = new Sender(sslSocket);
-      MainApp.applicationController.receiver = new Receiver(new ObjectInputStream(sslSocket.getInputStream()));
+      ApplicationController.sender = new Sender(sslSocket);
+      ApplicationController.receiver = new Receiver(new ObjectInputStream(sslSocket.getInputStream()));
 
       //set client authentication to true so that the server can verify the client with ssl certificate
       sslSocket.setNeedClientAuth(true);

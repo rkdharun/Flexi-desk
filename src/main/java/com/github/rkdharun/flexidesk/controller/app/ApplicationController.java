@@ -20,18 +20,16 @@ import java.net.DatagramPacket;
 public class ApplicationController {
   Server server = null;
   Client client = null;
-
   public static Sender sender;
-
   public static Receiver receiver;
   public BroadcastReceiver br = null;
-
   public Thread serverStartThread;
   public Thread clientJoinThread;
 
   private SSLSocket activeSocket;
-
   public  VBox  chatView;
+
+  public FXMLoader fl;
 
   /*---------------------------------------------------Server Controller Functions------------------------------------*/
 
@@ -129,6 +127,16 @@ public class ApplicationController {
    */
   public Client getClient() {
     return client;
+  }
+
+/**
+ * @return state - if true - client is connected else flase
+ */
+  public boolean isClientConnected(){
+    if(getClient() != null)
+      return this.getClient().getSslSocket().isConnected();
+    else
+      return false;
   }
 
 

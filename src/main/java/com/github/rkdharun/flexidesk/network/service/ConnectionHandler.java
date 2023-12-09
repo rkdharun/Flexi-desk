@@ -1,6 +1,7 @@
 package com.github.rkdharun.flexidesk.network.service;
 
 import com.github.rkdharun.flexidesk.MainApp;
+import com.github.rkdharun.flexidesk.controller.app.ApplicationController;
 import com.github.rkdharun.flexidesk.network.io.Receiver;
 import javafx.stage.DirectoryChooser;
 
@@ -25,7 +26,7 @@ public class ConnectionHandler implements   Runnable{
       try {
 //        InputStream inputStream = socket.getInputStream();
 //        ObjectInputStream objectInputStream =  new ObjectInputStream(inputStream);
-        ObjectInputStream objectInputStream =  MainApp.applicationController.receiver.objectInputStream;
+        ObjectInputStream objectInputStream =  ApplicationController.receiver.objectInputStream;
 
         byte[] header = new byte[4];
 

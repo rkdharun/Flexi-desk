@@ -17,7 +17,7 @@ public class BroadcastReceiver {
    */
   public BroadcastReceiver() {
     try {
-      socket = new DatagramSocket(5555);
+      socket = new DatagramSocket(0);
 
     } catch (SocketException e) {
       e.printStackTrace();
@@ -57,7 +57,7 @@ public class BroadcastReceiver {
 
     } catch (IOException e) {
       System.out.println("Returning from broadcast receiver");
-      e.printStackTrace();
+      System.out.println(e.getMessage());
       return null;
     }
 

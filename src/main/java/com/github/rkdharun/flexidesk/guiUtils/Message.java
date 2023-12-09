@@ -1,5 +1,6 @@
 package com.github.rkdharun.flexidesk.guiUtils;
 
+import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +19,7 @@ public class Message {
    * @param message custom message the user wants to display
    * @param title title of the stage or related heading to the message
    */
-  public  static  void show(String message,String title){
+  public  void show(String message,String title) {
     //create a new stage
     Stage stage = new Stage();
 
@@ -30,17 +31,17 @@ public class Message {
     Label lbl = new Label(message);
     Button close = new Button();
     close.setText("OK");
-    close.setOnAction(e-> stage.close());
+    close.setOnAction(e -> stage.close());
 
     //add the label and button to a vbox and set the alignment
     VBox vBox = new VBox();
-    vBox.getChildren().addAll(lbl,close);
+    vBox.getChildren().addAll(lbl, close);
     vBox.setAlignment(Pos.CENTER);
 
     //set the scene and show the stage
     Scene ss = new Scene(vBox);
     stage.setScene(ss);
-    stage.showAndWait();
 
+    stage.showAndWait();
   }
 }

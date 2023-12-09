@@ -20,7 +20,7 @@ import java.io.*;
 public class Sender {
 
   private SSLSocket socket;
-  private ObjectOutputStream objectOutputStream;
+  private final ObjectOutputStream objectOutputStream;
 
   public Sender(SSLSocket socket) {
     try {

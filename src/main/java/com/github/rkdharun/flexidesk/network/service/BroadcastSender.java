@@ -18,12 +18,12 @@ public class BroadcastSender {
    * Start broadcasting (starts a thread that send broadcast continously)
    * @param msg message to be broadcasted
    */
-  public void startBroadcasting(String msg,int port) {
+  public void startBroadcast(String msg,int port) {
     try {
       socket = new DatagramSocket(8888);
       broadcast(msg, port);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      System.out.println(e.getMessage());
     }
   }
 

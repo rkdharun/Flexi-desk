@@ -4,8 +4,8 @@ import java.io.FileInputStream;
 import java.io.Serializable;
 
 public class FilePacket implements Serializable {
-  private String fileName;
-  private Long fileLength;
+  private final String fileName;
+  private final Long fileLength;
 
 
   public FilePacket(FilePacketBuilder filePacketBuilder) {

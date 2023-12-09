@@ -2,6 +2,7 @@ package com.github.rkdharun.flexidesk.controller.ui;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.utilities.FXMLoader;
+import com.github.rkdharun.flexidesk.utilities.QRGenerator;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -38,7 +38,7 @@ public class PrimaryFXMLController implements Initializable {
   public Button btnJoin;
 
   //packgae  loading FXML Loader
-  FXMLoader fl;
+
 
   FXMLLoader qrPane;
 
@@ -65,7 +65,7 @@ public class PrimaryFXMLController implements Initializable {
     btnCreate.setMinHeight(40);
 
     //get the page
-    qrPane = fl.getPage("qrpage");
+    qrPane = FXMLoader.getPage("qrpage");
 
     // use the PrimaryFXMLController as its controller
     qrPane.setController(this);
@@ -81,7 +81,7 @@ public class PrimaryFXMLController implements Initializable {
       lbl_Info.setText("LOADING QR...");
 
       //set the QR code in the mainUI and update the status
-      img_qrCode.setImage(MainApp.applicationController.br.getQR());
+      img_qrCode.setImage(QRGenerator.getQR(String.valueOf(MainApp.applicationController.br.getBroadcastReceptionPort())));
 
       lbl_Info.setText("SCAN TO CONNECT 0R USE : " + MainApp.applicationController.br.getBroadcastReceptionPort());
 
@@ -105,32 +105,26 @@ public class PrimaryFXMLController implements Initializable {
 
     Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
 
-    for (Thread thread: threadSet) {
-      System.out.println(thread.getName());
-    }
 
-    System.out.println("running :: "+ threadSet.size());
+    System.out.println("Active Threads:: "+ threadSet.size());
 
-    System.out.println("waiting for the client to join to server");
+    System.out.println("Waiting For Client Response");
     try {
       MainApp.applicationController.clientJoinThread.join();
     } catch (InterruptedException e) {
-      throw new RuntimeException(e);
+      System.out.println(e.getMessage());
     }
-    System.out.println("waiting over for the client to join to server");
-    if (MainApp.applicationController.getClient() != null) {
-      if (MainApp.applicationController.getClient().getSslSocket().isConnected()) {
+
+    if (MainApp.applicationController.isClientConnected()){
         Platform.runLater(() -> {
           try {
             AnchorPane ap = FXMLoader.getPage("chatPage").load();
             mainBorderPane.setCenter(ap);
           } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
           }
         });
       }
-    }
-
 
   }
 
@@ -145,7 +139,7 @@ public class PrimaryFXMLController implements Initializable {
     MainApp.applicationController.resetApplication();
 
     //Load client fxml page Loader
-    clientPane = fl.getPage("clientPage");
+    clientPane = FXMLoader.getPage("clientPage");
 
     try {
 
@@ -162,31 +156,14 @@ public class PrimaryFXMLController implements Initializable {
 
     btnCreate.setMinHeight(35);
     btnJoin.setMinHeight(40);
-    System.out.println("JOined");
+    System.out.println("Joined");
   }
 
-  private void handle(MouseEvent me) {
-    if (me.getButton() != MouseButton.MIDDLE) {
 
-      MainApp.stage.getScene().getWindow().setX(me.getScreenX() - MainApp.initialX);
-      MainApp.stage.getScene().getWindow().setY(me.getScreenY() - MainApp.initialY);
-    }
-  }
 
-  private void handle2(MouseEvent me) {
-    if (me.getButton() != MouseButton.MIDDLE) {
-      MainApp.initialY = me.getSceneY();
-      MainApp.initialX = me.getSceneX();
-    }
-  }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-
-    //FXMLoader for loading fxml pages
-    fl = new FXMLoader();
-    mainBorderPane.getTop().setOnMousePressed(this::handle2);
-    mainBorderPane.getTop().setOnMouseDragged(this::handle);
 
   }
 

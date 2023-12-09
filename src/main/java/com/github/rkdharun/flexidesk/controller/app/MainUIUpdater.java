@@ -26,10 +26,10 @@ public class MainUIUpdater {
     anchorPane.getChildren().clear();
     FXMLLoader f = FXMLoader.getPage("chatPage");
     try {
-      AnchorPane ap =  f.load();
+      AnchorPane ap = f.load();
       anchorPane.getChildren().addAll(ap.getChildren());
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      System.out.println(e.getMessage());
     }
   }
 }

@@ -79,4 +79,20 @@ public class QRGenerator {
     }
     return new ImageView(wr).getImage();
   }
+
+  /**
+   *
+   * @return  QR code of the port number of the socket in which broadcastReceiver is receiving in client
+   */
+  public static javafx.scene.image.Image getQR(String message) {
+    int i = 0;
+    try {
+      System.out.println(message);
+      return QRGenerator.createQRImage(message, 800);
+    } catch (WriterException | IOException e) {
+      e.printStackTrace();
+    }
+    System.out.println("Returning NUll for broadcast port");
+    return null;
+  }
 }

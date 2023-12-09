@@ -24,7 +24,7 @@ public class ClientPageFXMLController {
   public void joinNetwork() {
     //check for empty string
     if (txtPortNumber.getText().equalsIgnoreCase("")) {
-      Message.show("Please enter a valid port number", "warning");
+      //Message.show("Please enter a valid port number", "warning");
     } else {
       int port = Integer.parseInt(txtPortNumber.getText().trim());
       MainUIUpdater.anchorPane = anchorPane;

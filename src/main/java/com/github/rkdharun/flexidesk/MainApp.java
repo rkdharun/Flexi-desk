@@ -2,17 +2,22 @@ package com.github.rkdharun.flexidesk;
 
 import com.github.rkdharun.flexidesk.controller.app.ApplicationController;
 
+import com.github.rkdharun.flexidesk.guiUtils.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class MainApp extends Application {
 
@@ -36,11 +41,10 @@ public class MainApp extends Application {
     mainUI = (BorderPane) loadFXML(fxml);
     Scene scene = new Scene(mainUI);
     scene.setFill(Color.TRANSPARENT);
-
     stage.setScene(scene);
-    stage.initStyle(StageStyle.TRANSPARENT);
     stage.setTitle(title);
     stage.show();
+
   }
 
 
@@ -65,18 +69,20 @@ public class MainApp extends Application {
   public void start(@SuppressWarnings("exports") Stage s) throws IOException {
     stage = s;
     setRoot("primary", "Flexi");
+
+
   }
 
   public static void main(String[] args) {
 
-
-    //Initialize the application controller
+      //Initialize the application controller
     applicationController = new ApplicationController();
-    System.out.println("Applciation is starting  :: "+Thread.activeCount()+" "+Thread.currentThread().getStackTrace()[1]);
+    System.out.println("Active Threads  :: "+Thread.activeCount());
 
     //launches the application
     launch(args);
-    System.out.println("Applciation is started  :: "+Thread.activeCount()+" "+Thread.currentThread().getStackTrace()[1]);
+
+
 
 
   }

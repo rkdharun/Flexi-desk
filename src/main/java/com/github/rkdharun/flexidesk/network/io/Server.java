@@ -2,6 +2,7 @@ package com.github.rkdharun.flexidesk.network.io;
 
 import com.github.rkdharun.flexidesk.MainApp;
 import com.github.rkdharun.flexidesk.config.SSLConfiguration;
+import com.github.rkdharun.flexidesk.controller.app.ApplicationController;
 import com.github.rkdharun.flexidesk.controller.app.MainUIUpdater;
 import com.github.rkdharun.flexidesk.network.service.BroadcastSender;
 import com.github.rkdharun.flexidesk.network.service.ConnectionHandler;
@@ -85,7 +86,7 @@ public class Server {
         System.out.println("Active threads are :" + Thread.activeCount());
         //start broadcasting
 
-        new Thread(() -> bs.startBroadcasting(String.valueOf(sslServerSocket.getLocalPort()), broadcastPort)).start();
+        new Thread(() -> bs.startBroadcast(String.valueOf(sslServerSocket.getLocalPort()), broadcastPort)).start();
 
         System.out.println("Waiting for connections");
         System.out.println("Active threads are :" + Thread.activeCount());
@@ -95,8 +96,8 @@ public class Server {
 
 
         MainApp.applicationController.setActiveSocket(currentSslSocket);
-        MainApp.applicationController.sender = new Sender(currentSslSocket);
-        MainApp.applicationController.receiver = new Receiver(new ObjectInputStream(currentSslSocket.getInputStream()));
+        ApplicationController.sender = new Sender(currentSslSocket);
+        ApplicationController.receiver = new Receiver(new ObjectInputStream(currentSslSocket.getInputStream()));
         //stop broadcasting to avoid further connections
         bs.stopBroadcasting();
 
@@ -108,8 +109,7 @@ public class Server {
         System.out.println("Connection AAccepted");
 
       } catch (IOException e) {
-        // check if server-socket is closed and break the loop for stopping any further connections to the same sever
-        if (sslServerSocket.isClosed()) ;
+        System.out.println(e.getMessage());
       }
 
   }
@@ -155,36 +155,3 @@ public class Server {
 
 }
 
-
-//class ClientHandler implements Runnable {
-//  private SSLSocket sslSocket;
-//  private Server server;
-//  public ClientHandler(SSLSocket sslSocket, Server server) {
-//    this.sslSocket = sslSocket;
-//    this.server = server;
-//  }
-//
-//
-//  //handles the client connection
-//  @Override
-//  public void run() {
-//    System.out.println(" Client handler Active threads are :" + Thread.activeCount());
-//
-//    try {
-//      System.out.println("reading from client");
-//      InputStream is = sslSocket.getInputStream();
-//      OutputStream os = sslSocket.getOutputStream();
-//      byte[] buff = new byte[1000];
-//      while (is.read(buff) != -1) {
-//        os.write(buff);
-//      }
-//
-//    } catch (Exception e) {
-//      System.out.println("ERROR MESSAGE ON CLIENT HANDLER :: "  +e.getMessage());
-//
-//
-//    }
-//    System.out.println("Active threads are :" + Thread.activeCount());
-//
-//  }
-//}
