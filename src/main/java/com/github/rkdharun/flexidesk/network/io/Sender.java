@@ -69,7 +69,7 @@ public class Sender {
     Platform.runLater(() -> {
       VBox chat = new VBox();
       HBox filename = new HBox();
-      chat.setAlignment(Pos.BOTTOM_LEFT);
+      chat.setAlignment(Pos.BOTTOM_RIGHT);
       Label l =  new Label(fileName);
       l.setWrapText(true);
       l.setTextFill(Paint.valueOf("white"));
@@ -78,6 +78,7 @@ public class Sender {
       Label progress = new Label();
       progress.setTextFill(Paint.valueOf("white"));
       progress.setText(lambdaContext.total + "/"+ tsize);
+      progress.setPadding( new Insets(20.0,20.0,20.0,20.0));
       chat.getChildren().add(progress);
 
 

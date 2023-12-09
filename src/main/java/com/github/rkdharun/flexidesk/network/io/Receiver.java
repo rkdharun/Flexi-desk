@@ -7,6 +7,8 @@ import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,6 +25,7 @@ import javafx.event.EventHandler;
 
 import javax.swing.*;
 
+import java.awt.*;
 import java.io.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -79,10 +82,14 @@ public class Receiver {
       Long finalTotalReceived = ref.totalReceived;
       Platform.runLater(()->{
         VBox chat = new VBox();
+        chat.setAlignment(Pos.BOTTOM_LEFT);
         Label msg = new Label(fp.getFileName());
+        msg.setWrapText(true);
+        msg.setTextFill(Paint.valueOf("white"));
         Label progress = new Label();
         progress.setTextFill(Paint.valueOf("white"));
         progress.setText(ref.totalReceived + "/"+ toRead);
+        progress.setPadding( new Insets(20.0,20.0,20.0,20.0));
         chat.getChildren().add(msg);
         chat.getChildren().add(progress);
 
