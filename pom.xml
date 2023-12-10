@@ -1,153 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.example</groupId>
+  <groupId>com.github.rkdharun.flexi</groupId>
   <artifactId>flexi</artifactId>
   <version>0.0.1</version>
-  <packaging>jar</packaging>
-
   <name>flexi</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <mainClass>flexi.MainApp</mainClass>
+    <junit.version>5.9.2</junit.version>
+    <jlink-image-name>flexi</jlink-image-name>
+    <zxing-jar-name>zxing.jar</zxing-jar-name>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>com.google.zxing</groupId>
-      <artifactId>core</artifactId>
-      <version>3.3.2</version>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>17.0.6</version>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>11</version>
+      <version>17.0.6</version>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.bouncycastle</groupId>-->
+<!--      <artifactId>bcpkix-jdk15on</artifactId>-->
+<!--      <version>1.61</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-media</artifactId>
-      <version>11</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
     </dependency>
-
-
-    <dependency>
-      <groupId>org.bouncycastle</groupId>
-      <artifactId>bcpkix-jdk15on</artifactId>
-      <version>1.60</version>
-    </dependency>
-
-
-    <dependency>
-      <groupId>com.google.zxing</groupId>
-      <artifactId>core</artifactId>
-      <version>3.5.0</version>
-    </dependency>
-
   </dependencies>
 
   <build>
     <plugins>
-      <!-- adds file to let you run program outside of IDE -->
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <configuration>
-              <tasks>
-                <echo file="${project.build.directory}/runme.bat">start jlink-image\bin\javaw -jar
-                  modules\${project.artifactId}-${project.version}.jar
-                </echo>
-              </tasks>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- sets up the version of Java you are running -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.11.0</version>
         <configuration>
-          <release>11</release>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>6.2.1</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-
-      <!-- Adds the mainClass to the jar, so it will run outside -->
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>${mainClass}</mainClass>
-            </manifest>
-          </archive>
-          <outputDirectory>${project.build.directory}/modules</outputDirectory>
+          <source>17</source>
+          <target>17</target>
         </configuration>
       </plugin>
-
-      <!-- Makes the jLink setup, so you can give it to your friends  -->
       <plugin>
-        <groupId>org.moditect</groupId>
-        <artifactId>moditect-maven-plugin</artifactId>
-        <version>1.0.0.Beta2</version>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.8</version>
         <executions>
           <execution>
-            <id>create-runtime-image</id>
-            <phase>package</phase>
-            <goals>
-              <goal>create-runtime-image</goal>
-            </goals>
+            <!-- Default configuration for running with: mvn clean javafx:run -->
+            <id>default-cli</id>
             <configuration>
-              <modulePath>
-                <path>${project.build.directory}/modules</path>
-              </modulePath>
-              <modules>
-                <module>${project.groupId}</module>
-              </modules>
-              <launcher>
-                <name>${project.groupId}</name>
+              <artifactItems>
+                <!-- Copy ini4j jar into the jlink image -->
+                <artifactItem>
+                  <groupId>com.google.zxing</groupId>
+                  <artifactId>core</artifactId>
+                  <version>3.5.0</version>
+                  <type>jar</type>
+                  <destFileName>${zxing-jar-name}</destFileName>
+                </artifactItem>
+              </artifactItems>
+              <!-- Set output directory to lib folder in jlink image -->
+              <outputDirectory>${project.build.directory}/${jlink-image-name}/lib</outputDirectory>
+              <overWriteReleases>true</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
 
-              </launcher>
-              <compression>2</compression>
+              <mainClass>com.github.rkdharun.flexidesk/com.github.rkdharun.flexidesk.MainApp</mainClass>
+              <launcher>app</launcher>
+              <jlinkZipName>app</jlinkZipName>
+              <jlinkImageName>app</jlinkImageName>
+              <noManPages>true</noManPages>
               <stripDebug>true</stripDebug>
-              <outputDirectory>${project.build.directory}/jlink-image</outputDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Copies the depend on FX files to your program  -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy-dependencies</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/modules</outputDirectory>
-              <includeScope>runtime</includeScope>
+              <noHeaderFiles>true</noHeaderFiles>
             </configuration>
           </execution>
         </executions>
