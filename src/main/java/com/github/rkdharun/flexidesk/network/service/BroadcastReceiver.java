@@ -1,9 +1,6 @@
 package com.github.rkdharun.flexidesk.network.service;
 
 
-import com.github.rkdharun.flexidesk.utilities.QRGenerator;
-import com.google.zxing.WriterException;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -71,22 +68,7 @@ public class BroadcastReceiver {
     return socket.getLocalPort();
   }
 
-  /**
-   *
-   * @return  QR code of the port number of the socket in which broadcastReceiver is receiving in client
-   */
-  public javafx.scene.image.Image getQR() {
-    int i = 0;
-    try {
-      String message = String.valueOf(socket.getLocalPort());
-      System.out.println(message);
-      return QRGenerator.createQRImage(message, 800);
-    } catch (WriterException | IOException e) {
-       e.printStackTrace();
-    }
-    System.out.println("Returning NUll for broadcast port");
-    return null;
-  }
+
 
   /**
    * closes the socket and stops receiving broadcast

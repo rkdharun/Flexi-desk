@@ -64,34 +64,37 @@ public class PrimaryFXMLController implements Initializable {
     btnJoin.setMinHeight(35);
     btnCreate.setMinHeight(40);
 
-    //get the page
-    qrPane = FXMLoader.getPage("qrpage");
+    //get the pageqrPane = FXMLoader.getPage("qrPage");
+
 
     // use the PrimaryFXMLController as its controller
     qrPane.setController(this);
 
+
+    //retrive the Pane (node)
+    System.out.println("Inside try to load");
     try {
-      //retrive the Pane (node)
       qrUI = qrPane.load();
-
-      //insert the loaded page in the main UI
-      mainBorderPane.setCenter(qrUI);
-
-      //set status to loading
-      lbl_Info.setText("LOADING QR...");
-
-      //set the QR code in the mainUI and update the status
-      img_qrCode.setImage(QRGenerator.getQR(String.valueOf(MainApp.applicationController.br.getBroadcastReceptionPort())));
-
-      lbl_Info.setText("SCAN TO CONNECT 0R USE : " + MainApp.applicationController.br.getBroadcastReceptionPort());
-
-      //update ui on receiving a connection
-      Thread temp1 = new Thread(() -> setChatUI());
-      temp1.setName("ChatUISetting thread");
-      temp1.start();
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      System.out.println("Cannot Load");
     }
+    System.out.println("Loading Bro");
+
+    //insert the loaded page in the main UI
+    mainBorderPane.setCenter(qrUI);
+    System.out.println("Set panniyachu");
+    //set status to loading
+    lbl_Info.setText("LOADING QR...");
+
+    //set the QR code in the mainUI and update the status
+    img_qrCode.setImage(QRGenerator.getQR(String.valueOf(MainApp.applicationController.br.getBroadcastReceptionPort())));
+
+    lbl_Info.setText("SCAN TO CONNECT 0R USE : " + MainApp.applicationController.br.getBroadcastReceptionPort());
+
+    //update ui on receiving a connection
+    Thread temp1 = new Thread(() -> setChatUI());
+    temp1.setName("ChatUISetting thread");
+    temp1.start();
 
 
   }

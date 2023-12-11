@@ -17,6 +17,16 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
               <transformers>
                 <transformer>
                   <mainClass>${main.class}</mainClass>
@@ -54,7 +64,7 @@
               <outputDirectory>${project.build.directory}/${jlink-image-name}/lib</outputDirectory>
               <overWriteReleases>true</overWriteReleases>
               <overWriteSnapshots>true</overWriteSnapshots>
-              <mainClass>com.github.rkdharun.flexidesk/com.github.rkdharun.flexidesk.MainApp</mainClass>
+              <mainClass>com.github.rkdharun.flexidesk/com.github.rkdharun.flexidesk.Main</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
@@ -107,7 +117,7 @@
     </dependency>
   </dependencies>
   <properties>
-    <main.class>com.github.rkdharun.flexidesk.MainApp</main.class>
+    <main.class>com.github.rkdharun.flexidesk.Main</main.class>
     <zxing-jar-name>zxing.jar</zxing-jar-name>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.9.2</junit.version>

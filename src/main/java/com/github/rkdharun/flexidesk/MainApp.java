@@ -3,11 +3,13 @@ package com.github.rkdharun.flexidesk;
 import com.github.rkdharun.flexidesk.controller.app.ApplicationController;
 
 import com.github.rkdharun.flexidesk.guiUtils.Message;
+import com.github.rkdharun.flexidesk.utilities.QRGenerator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -70,21 +72,11 @@ public class MainApp extends Application {
     stage = s;
     setRoot("primary", "Flexi");
 
-
   }
-
-  public static void main(String[] args) {
-
-      //Initialize the application controller
+  public  static void main(String[] args){
     applicationController = new ApplicationController();
-    System.out.println("Active Threads  :: "+Thread.activeCount());
-
-    //launches the application
-    launch(args);
-
-
-
-
+    launch();
   }
+
 
 }

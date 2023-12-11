@@ -1,33 +1,21 @@
 package com.github.rkdharun.flexidesk.network.io;
 
 import com.github.rkdharun.flexidesk.MainApp;
-import com.github.rkdharun.flexidesk.guiUtils.ProgressIndicatorBox;
 import com.github.rkdharun.flexidesk.network.packets.FilePacket;
 import javafx.application.Platform;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleFloatProperty;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.event.EventHandler;
 
-import javax.swing.*;
-
-import java.awt.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Receiver {
